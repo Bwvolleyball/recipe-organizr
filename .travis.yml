@@ -8,12 +8,26 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-matrix:
+stages:
+  - compile
+
+jobs:
   include:
-    - language: java
+    - stage: compile
+      language: java
       jdk: openjdk8
       install: true
       before_script:
         - cd gateway
       script:
         - ./gradlew build --scan -s
+    - stage: compile
+      language: node_js
+      node_js: lts/*
+      before_script:
+        - npm install -g @angular/cli
+        - cd recipe-organizr-ui
+      script:
+        - npm install
+        - ng lint recipe-organizr-ui
+        - ng build recipe-organizr-ui --configuration=production --sourceMap=true --statsJson
