@@ -28,6 +28,6 @@ jobs:
         - npm install -g @angular/cli
         - cd recipe-organizr-ui
       script:
-        - npm install
+        - npm ci
         - ng lint recipe-organizr-ui
         - ng build recipe-organizr-ui --configuration=production --sourceMap=true --statsJson
