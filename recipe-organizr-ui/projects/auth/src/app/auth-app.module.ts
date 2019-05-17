@@ -1,28 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AuthAppComponent } from './auth-app.component';
-
-const providers = [];
+import {AuthAppComponent} from './auth-app.component';
+import {AuthAppRoutingModule} from './auth-app-routing.module';
 
 @NgModule({
   declarations: [
     AuthAppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AuthAppRoutingModule
   ],
-  providers,
+  providers: [],
   bootstrap: [AuthAppComponent]
 })
-export class AuthAppModule { }
-
-@NgModule({})
-export class AuthAppSharedModule{
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: AuthAppModule,
-      providers
-    };
-  }
+export class AuthAppModule {
 }
