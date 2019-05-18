@@ -1,19 +1,21 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {AuthAppComponent} from './auth-app.component';
-import {LoginComponent} from './login/login.component';
-import {AuthDetailsComponent} from './auth-details/auth-details.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {OktaCallbackComponent} from '@okta/okta-angular';
+import {SecureLoginComponent} from './secure-login/secure-login.component';
 
 const routes: Routes = [
-  {path: 'auth',
-  children: [
-    {path: 'login', component: LoginComponent},
-    {path: '**', component: AuthDetailsComponent}
-    ]}
+  {
+    path: 'auth',
+    children: [
+      {path: 'secure', component: SecureLoginComponent},
+      {path: 'callback', component: OktaCallbackComponent}
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthAppRoutingModule { }
+export class AuthAppRoutingModule {
+}

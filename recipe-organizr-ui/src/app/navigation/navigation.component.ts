@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../projects/auth/src/app/user.service';
-import {SocialUser} from 'angularx-social-login';
+import {OktaAuthService, UserClaims} from '@okta/okta-angular';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -9,26 +10,41 @@ import {SocialUser} from 'angularx-social-login';
 })
 export class NavigationComponent implements OnInit {
 
-  private socialUser: SocialUser;
+  private userClaims: UserClaims;
   private user = 'Guest';
 
-  constructor(private userService: UserService) { }
+  isAuthenticated: boolean;
 
-  ngOnInit() {
-    this.userService.getUser().subscribe((socialUser) => this.receiveSocialUser(socialUser));
+  constructor(private userService: UserService, private oktaAuth: OktaAuthService, private router: Router) {
+    this.oktaAuth.$authenticationState.subscribe((isAuthenticated: boolean) => this.authenticatedStateChanged(isAuthenticated));
   }
 
-  receiveSocialUser(socialUser: SocialUser): void {
-    this.socialUser = socialUser;
-    if (socialUser) {
-      this.user = socialUser.firstName;
+  async ngOnInit() {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    this.authenticatedStateChanged(this.isAuthenticated);
+  }
+
+  login() {
+    this.oktaAuth.loginRedirect('/profile');
+  }
+
+  logout() {
+    this.oktaAuth.logout().then(() => this.router.navigateByUrl('/'));
+  }
+
+  authenticatedStateChanged(isAuthenticated: boolean) {
+    console.log('New authenticated state: %s', isAuthenticated);
+    this.isAuthenticated = isAuthenticated;
+    if (isAuthenticated) {
+      this.oktaAuth.getUser().then(user => {
+        this.userClaims = user;
+        this.user = this.userClaims.given_name;
+      });
     } else {
+      this.userClaims = null;
       this.user = 'Guest';
     }
+
   }
 
-  logOut(): void {
-    this.userService.logOutUser();
-    this.receiveSocialUser(null);
-  }
 }
