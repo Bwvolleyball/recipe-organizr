@@ -13,6 +13,14 @@ export class UserService implements OnInit {
   }
 
   ngOnInit() {
+    this.oktaAuth.getUser().then(user => this.oktaUser.next(user));
+    this.oktaAuth.$authenticationState.subscribe(ignored => {
+      this.oktaAuth.getUser().then(user => this.oktaUser.next(user));
+    });
+  }
 
+  public user(): Subject<UserClaims> {
+    this.oktaAuth.getUser().then(user => this.oktaUser.next(user));
+    return this.oktaUser;
   }
 }

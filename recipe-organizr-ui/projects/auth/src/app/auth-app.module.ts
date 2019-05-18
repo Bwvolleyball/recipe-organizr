@@ -8,6 +8,7 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {OktaAuthModule} from '@okta/okta-angular';
 import { SecureLoginComponent } from './secure-login/secure-login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const oktaConfig = {
   issuer: 'https://dev-331898.okta.com/oauth2/default',
@@ -24,6 +25,7 @@ const oktaConfig = {
     AuthAppComponent,
     AuthDetailsComponent,
     SecureLoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  private userClaims: UserClaims;
-  private user = 'Guest';
+  userClaims: UserClaims;
+  user = 'Guest';
 
   isAuthenticated: boolean;
 
