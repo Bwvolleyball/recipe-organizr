@@ -30,4 +30,4 @@ jobs:
       script:
         - npm ci
         - ng lint recipe-organizr-ui
-        - ng build recipe-organizr-ui --configuration=production --sourceMap=true --statsJson
+        - ng build --prod --aot
