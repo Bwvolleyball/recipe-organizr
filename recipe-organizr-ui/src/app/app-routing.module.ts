@@ -5,12 +5,11 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent, pathMatch: 'full'},
-  {path: 'auth', loadChildren: '../../projects/auth/src/app/auth-app.module#AuthAppModule'},
   {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

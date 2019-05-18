@@ -1,0 +1,23 @@
+<div class="card mt-5 ml-5 mr-5 mx-auto" id="card">
+  <div class="card-header bg-light text-center">
+    <div class="">
+      <span class="card-title h1 col-8">Log in / Sign up</span>
+      <fa-icon [icon]="faQuestionCircle"
+               tooltip="We use trusted 3rd parties to facilitate both registration and logging in! Please choose your provider of choice!" [delay]="300"></fa-icon>
+    </div>
+  </div>
+  <form class="mt-5 ml-5 mr-5">
+    <div class="form-group text-center">
+      <input class="btn img-fluid rounded" type="image"
+             src='assets/google/btn_google_signin_dark_{{gState}}_web@2x.png'
+             (focusin)="focusGoogle()" (focusout)="defocusGoogle()" (click)="clickGoogle()"
+             alt="Sign in with Google"/>
+    </div>
+    <div class="form-group text-center">
+      <input class="btn img-fluid rounded" type="image"
+             src='assets/facebook/continue_with_facebook.png'
+             (click)="clickFacebook()"
+             alt="Sign in with Facebook"/>
+    </div>
+  </form>
+</div>
