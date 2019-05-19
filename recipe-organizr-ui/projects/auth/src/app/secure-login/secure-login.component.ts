@@ -15,7 +15,7 @@ export class SecureLoginComponent implements OnInit {
     logo: '//logo.clearbit.com/regis.edu',
     baseUrl: 'https://dev-331898.okta.com',
     clientId: '0oam1iayfZDqSKNw1356',
-    redirectUri: 'http://localhost:4200/auth/callback',
+    redirectUri: `${window.location.protocol}//${window.location.host}/auth/callback`,
     i18n: {
       en: {
         'primaryauth.title': 'Sign in to Recipe Organizr'

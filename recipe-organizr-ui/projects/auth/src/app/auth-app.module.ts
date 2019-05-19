@@ -12,7 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 const oktaConfig = {
   issuer: 'https://dev-331898.okta.com/oauth2/default',
-  redirectUri: 'http://localhost:4200/auth/callback',
+  redirectUri: `${window.location.protocol}//${window.location.host}/auth/callback`,
   clientId: '0oam1iayfZDqSKNw1356',
   url: 'https://dev-331898.okta.com',
   responseType: 'id_token',

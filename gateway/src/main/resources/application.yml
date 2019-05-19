@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        # The default, catch-all route sends items to the Angular SPA.
+        - id: spa
+          uri: http://localhost:4200
+          predicates:
+            - After=1970-01-01T00:00:00.000-00:00[America/Denver]
