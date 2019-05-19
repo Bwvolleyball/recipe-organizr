@@ -95,3 +95,10 @@ cd /opt/tomcat/latest/bin
 ```
 
 Tomcat should now be running on http://localhost:8080!
+
+### Field Notebook Screenshot
+
+I am still deciding on the format that will work best for me for my field notebook, however, the field notebook entries for this assignment was made in Word.
+Below is the screenshot of the notes taken as part of this exercise.
+
+![Linux Field Notebook Entries](./images/screen_shot_field_notebook.png)
