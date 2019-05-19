@@ -1,6 +1,9 @@
 # Server Installation
 
-As part of this course's requirements, we had to prepare a web server installation.  Various parts of my application will be deployed to different types of web servers.  The 3 types of web servers I will need are Netty, Tomcat, and Express.  Since the bulk of the applications will be running on Tomcat, since there will assumedly be multiple microservices, I chose to focus on the tomcat installation.
+As part of this course's requirements, we had to prepare a web server installation.
+Various parts of my application will be deployed to different types of web servers.
+The 3 types of web servers I will need are Apache, Tomcat, and Express.
+The bulk of the applications will be running on Tomcat, since there will assumedly be multiple microservices, I chose to focus on the tomcat installation.
 
 Here is the screenshot of the installed and running Tomcat server:
 ![Tomcat Server Installation Screenshot](./images/tomcat_server_install.png)
@@ -44,7 +47,7 @@ sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 sudo vi /etc/systemd/system/tomcat.service
 ```
 
-Here is the contents of the tomcat.service file:
+Here is the contents of the `tomcat.service` file:
 
 ```properties
 [Unit]
