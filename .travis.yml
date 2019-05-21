@@ -1,8 +1,12 @@
 sudo: false
 
+services:
+  - docker
+
 before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
     - $HOME/.gradle/caches/
@@ -31,3 +35,6 @@ jobs:
         - npm ci
         - ng lint recipe-organizr-ui
         - ng build --prod --aot
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
