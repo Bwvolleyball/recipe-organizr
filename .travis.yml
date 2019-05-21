@@ -1,15 +1,21 @@
 sudo: false
 
+services:
+  - docker
+
 before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+        - rm -fr $TRAVIS_BUILD_DIR/recipe-organizr-ui/dist
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $TRAVIS_BUILD_DIR/recipe-organizr-ui/dist
 
 stages:
   - compile
+  - docker
 
 jobs:
   include:
@@ -31,3 +37,11 @@ jobs:
         - npm ci
         - ng lint recipe-organizr-ui
         - ng build --prod --aot
+    - stage: docker
+      if: branch = master
+      before_script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - cd recipe-organizr-ui
+      script:
+        - docker build -t $DOCKER_USERNAME/$RECIPE_ORGANIZR_UI_IMAGE .
+        - docker push $DOCKER_USERNAME/$RECIPE_ORGANIZR_UI_IMAGE
