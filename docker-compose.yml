@@ -4,6 +4,8 @@ services:
     image: postgres:11-alpine
     ports:
       - '5432:5432'
+    volumes:
+      - ./docker/postgres/:/docker-entrypoint-initdb.d/
   recipe-organizr-ui:
     image: bwvolleyball/recipe-organizr-ui
     ports:

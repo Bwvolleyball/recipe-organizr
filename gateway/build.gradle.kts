@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id ("org.springframework.boot") version "2.1.4.RELEASE"
-	id ("org.jetbrains.kotlin.jvm") version "1.2.71"
-	id ("org.jetbrains.kotlin.plugin.spring") version "1.2.71"
+	id ("org.jetbrains.kotlin.jvm") version "1.3.31"
+	id ("org.jetbrains.kotlin.plugin.spring") version "1.3.31"
 	id ("com.gradle.build-scan") version "2.3"
 }
 

@@ -7,8 +7,9 @@ import {AuthAppModule} from '../../projects/auth/src/app/auth-app.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import {UserService} from '../../projects/auth/src/app/user.service';
+import {UserService} from '../../projects/auth/src/app/user/user.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FontAwesomeModule,
     AuthAppModule,
     // AppRoutingModule must always be the last module
