@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
 import {OktaAuthService, OktaCallbackComponent} from '@okta/okta-angular';
 import {LoginService} from '../login/login.service';
 
@@ -12,7 +11,7 @@ export class PostAuthenticationGuard implements CanDeactivate<OktaCallbackCompon
   constructor(private oktaAuth: OktaAuthService, private loginService: LoginService) {
   }
 
-  canDeactivate(component: OktaCallbackComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): boolean {
+  canDeactivate(_: OktaCallbackComponent, __: ActivatedRouteSnapshot, ___: RouterStateSnapshot, ____: RouterStateSnapshot): boolean {
     console.log('The OktaCallbackComponent canDeactivate fired!');
     this.oktaAuth.isAuthenticated().then(authenticated => {
       this.oktaAuth.getIdToken().then(idToken => {

@@ -12,7 +12,3 @@ spring:
       ddl-auto: create-drop
   flyway:
     enabled: false
-
-bwvolleyball:
-  auth:
-    okta-domain: dev-331898.okta.com

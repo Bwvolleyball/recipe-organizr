@@ -7,9 +7,17 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.7.RELEASE"
 	kotlin("jvm") version "1.3.31"
 	kotlin("plugin.spring") version "1.3.31"
+	id ("com.gradle.build-scan") version "2.3"
 }
 
 apply (plugin = "io.spring.dependency-management")
+
+buildScan {
+	termsOfServiceUrl = "https://gradle.com/terms-of-service"
+	termsOfServiceAgree = "yes"
+
+	publishAlways()
+}
 
 group = "io.bwvolleyball"
 version = "0.0.1-SNAPSHOT"
@@ -45,12 +53,12 @@ dependencies {
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("io.github.microutils:kotlin-logging:$kotlinLogginVersion")
 	implementation("org.flywaydb:flyway-core:$flywayVersion")
-	implementation("com.okta.jwt:okta-jwt-verifier:$oktaVersion")
-	runtime("com.okta.jwt:okta-jwt-verifier-impl:$oktaVersion")
+//	implementation("com.okta.jwt:okta-jwt-verifier:$oktaVersion")
+//	runtime("com.okta.jwt:okta-jwt-verifier-impl:$oktaVersion")
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
-	runtime("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
-	runtime("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
-	implementation("com.nimbusds:nimbus-jose-jwt:7.2.1")
+	implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
+	implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+//	implementation("com.nimbusds:nimbus-jose-jwt:7.2.1")
 	runtime("org.bouncycastle:bcprov-jdk15on:$bouncyCastleVersion")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
