@@ -10,6 +10,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import {UserService} from '../../projects/auth/src/app/user/user.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from '@angular/common/http';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
+    CarouselModule.forRoot(),
     AuthAppModule,
     // AppRoutingModule must always be the last module
     AppRoutingModule

@@ -23,5 +23,4 @@ export class PostAuthenticationGuard implements CanDeactivate<OktaCallbackCompon
     // we always allow the user to deactivate the OktaCallbackComponent, but we leverage this to capture their login.
     return true;
   }
-
 }

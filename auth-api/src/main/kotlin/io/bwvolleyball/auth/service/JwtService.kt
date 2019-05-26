@@ -1,7 +1,8 @@
 package io.bwvolleyball.auth.service
 
 import io.bwvolleyball.auth.domain.Login
-import io.bwvolleyball.auth.domain.OktaCredentials
+import io.bwvolleyball.auth.domain.User
+import io.bwvolleyball.auth.domain.TokenParser
 import io.jsonwebtoken.Jwt
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.impl.DefaultClaims
@@ -9,18 +10,18 @@ import org.springframework.stereotype.Service
 
 
 interface JwtService {
-    fun decodeLogin(login: Login): OktaCredentials
+    fun decodeLogin(login: Login): User
 }
 
 @Service
-internal class JwtServiceImpl() : JwtService {
+internal class JwtServiceImpl : JwtService {
 
-    override fun decodeLogin(login: Login): OktaCredentials {
+    override fun decodeLogin(login: Login): User {
         // this token has the identity information passed by Okta
         val idToken = decodeTokenUnsecure(login.idToken)
         // this token has the uid and is a more standard JWT
         val accessToken = decodeTokenUnsecure(login.accessToken)
-        return OktaCredentials(idToken = idToken, accessToken = accessToken)
+        return TokenParser().accessToken(accessToken).idToken(idToken).build()
     }
 
     /**

@@ -6,7 +6,23 @@ services:
       - '5432:5432'
     volumes:
       - ./docker/postgres/:/docker-entrypoint-initdb.d/
+    networks:
+      localnet:
+        aliases:
+          - postgres.local
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - '34580:34580'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@email.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_PORT: 34580
+    networks:
+      - localnet
   recipe-organizr-ui:
     image: bwvolleyball/recipe-organizr-ui
     ports:
       - '4200:80'
+networks:
+  localnet:

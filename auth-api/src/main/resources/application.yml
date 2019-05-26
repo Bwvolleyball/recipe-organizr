@@ -1,6 +1,11 @@
 server:
   port: 8181
 
+logging:
+  level:
+    # Hides HHH000424: Disabling contextual LOB creation as createClob() method threw error
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: WARN
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/users
@@ -12,5 +17,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      default_schema: users
   flyway:
     enabled: false
