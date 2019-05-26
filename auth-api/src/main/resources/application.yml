@@ -8,7 +8,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/users
+    url: jdbc:postgresql://${bwvolleyball.database.host}:5432/users
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -22,3 +22,7 @@ spring:
       default_schema: users
   flyway:
     enabled: false
+
+bwvolleyball:
+  database:
+    host: ${DATABASE_HOST:localhost}
