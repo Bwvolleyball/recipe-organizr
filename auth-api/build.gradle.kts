@@ -31,7 +31,6 @@ configurations {
 
 val kotlinLogginVersion = "1.6.24"
 val flywayVersion = "5.2.4"
-val oktaVersion = "0.4.0"
 val jjwtVersion = "0.10.5"
 val bouncyCastleVersion = "1.60"
 
@@ -53,12 +52,9 @@ dependencies {
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("io.github.microutils:kotlin-logging:$kotlinLogginVersion")
 	implementation("org.flywaydb:flyway-core:$flywayVersion")
-//	implementation("com.okta.jwt:okta-jwt-verifier:$oktaVersion")
-//	runtime("com.okta.jwt:okta-jwt-verifier-impl:$oktaVersion")
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 	implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
 	implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
-//	implementation("com.nimbusds:nimbus-jose-jwt:7.2.1")
 	runtime("org.bouncycastle:bcprov-jdk15on:$bouncyCastleVersion")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

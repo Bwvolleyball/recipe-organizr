@@ -25,6 +25,9 @@ jobs:
         - cd gateway
       script:
         - ./gradlew build --scan -s
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . && docker push bwvolleyball/gateway
     - stage: compile
       language: java
       jdk: openjdk8
@@ -33,6 +36,9 @@ jobs:
         - cd auth-api
       script:
         - ./gradlew build --scan -s
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . && docker push bwvolleyball/auth-api
     - stage: compile
       language: node_js
       node_js: lts/*
