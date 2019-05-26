@@ -29,7 +29,7 @@ export class SecureLoginComponent implements OnInit {
     authParams: {
       display: 'page',
       responseType: ['id_token', 'token'],
-      scopes: ['openid', 'email', 'profile']
+      scopes: ['openid', 'email', 'profile', 'address', 'phone']
     },
     customButtons: [
       {

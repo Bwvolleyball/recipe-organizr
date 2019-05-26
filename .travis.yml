@@ -26,6 +26,14 @@ jobs:
       script:
         - ./gradlew build --scan -s
     - stage: compile
+      language: java
+      jdk: openjdk8
+      install: true
+      before_script:
+        - cd auth-api
+      script:
+        - ./gradlew build --scan -s
+    - stage: compile
       language: node_js
       node_js: lts/*
       before_script:

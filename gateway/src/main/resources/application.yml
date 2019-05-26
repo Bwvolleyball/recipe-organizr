@@ -2,6 +2,10 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: auth-api
+          uri: http://localhost:8181
+          predicates:
+            - Path=/api/auth/**
         # The default, catch-all route sends items to the Angular SPA.
         - id: spa
           uri: http://localhost:4200
