@@ -11,13 +11,17 @@ import {UserService} from '../../projects/auth/src/app/user/user.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from '@angular/common/http';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import { FooterComponent } from './footer/footer.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    FooterComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,
