@@ -1,0 +1,37 @@
+server:
+  port: 8282
+
+logging:
+  level:
+    # Hides HHH000424: Disabling contextual LOB creation as createClob() method threw error
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: WARN
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${bwvolleyball.database.host}:5432/recipes
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      default_schema: users
+  flyway:
+    enabled: false
+
+feign:
+  client:
+    config:
+      mealDbFeignClient:
+        loggerLevel: full
+
+bwvolleyball:
+  database:
+    host: ${DATABASE_HOST:localhost}
+  mealdb:
+#    api-key: 8673533
+    api-key: 1
