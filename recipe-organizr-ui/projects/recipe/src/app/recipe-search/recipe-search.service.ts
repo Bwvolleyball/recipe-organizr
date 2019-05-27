@@ -24,10 +24,6 @@ export class RecipeSearchService {
     return this.predictionSubject.asObservable();
   }
 
-  searchResults(): Observable<Recipe[]> {
-    return this.searchSubject.asObservable();
-  }
-
   predict(name: string) {
     if (!this.predictionSubscription.closed) {
       this.predictionSubscription.unsubscribe();
@@ -38,12 +34,11 @@ export class RecipeSearchService {
     this.predictionSubscription = next.subscribe(results => this.predictionSubject.next(results));
   }
 
-  search(name: string) {
+  search(name: string): Observable<Recipe[]> {
     if (!this.searchSubscription.closed) {
       this.searchSubscription.unsubscribe();
     }
     const url = this.searchUrl + name;
-    const next: Observable<Recipe[]> = name.trim() === '' ? of([]) : this.http.get<Recipe[]>(url);
-    this.searchSubscription = next.subscribe(results => this.searchSubject.next(results));
+    return name.trim() === '' ? of([]) : this.http.get<Recipe[]>(url);
   }
 }

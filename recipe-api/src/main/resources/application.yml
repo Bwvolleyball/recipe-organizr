@@ -33,5 +33,5 @@ bwvolleyball:
   database:
     host: ${DATABASE_HOST:localhost}
   mealdb:
-#    api-key: 8673533
-    api-key: 1
+    api-key: 8673533
+    version: v2

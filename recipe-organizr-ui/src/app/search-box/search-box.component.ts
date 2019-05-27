@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {RecipeSearchService} from '../../../projects/recipe/src/app/recipe-search/recipe-search.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-box',
@@ -14,7 +15,7 @@ export class SearchBoxComponent implements OnInit {
   searchResults: string[] = [];
   activated: boolean[] = [];
 
-  constructor(private recipeSearchService: RecipeSearchService) {
+  constructor(private recipeSearchService: RecipeSearchService, private router: Router) {
   }
 
   ngOnInit() {
@@ -32,5 +33,6 @@ export class SearchBoxComponent implements OnInit {
 
   selectRecipe(name: string) {
     console.log('Selected recipe: ' + name);
+    this.recipeSearchService.search(name).subscribe(recipe => this.router.navigateByUrl('/recipe/detail/' + recipe[0].id ));
   }
 }
