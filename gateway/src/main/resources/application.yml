@@ -3,15 +3,26 @@ spring:
     gateway:
       routes:
         - id: auth-api
-          uri: http://${bwvolleyball.hosts.auth-api}:8181
+          uri: http://${bwvolleyball.hosts.auth-api.domain}:${bwvolleyball.hosts.auth-api.port}
           predicates:
             - Path=/api/auth/**
+        - id: recipe-api
+          uri: http://${bwvolleyball.hosts.recipe-api.domain}:${bwvolleyball.hosts.recipe-api.port}
+          predicates:
+            - Path=/api/recipe/**
         # The default, catch-all route sends items to the Angular SPA.
         - id: spa
-          uri: http://${bwvolleyball.hosts.spa}:4200
+          uri: http://${bwvolleyball.hosts.spa.domain}:${bwvolleyball.hosts.spa.port}
           predicates:
             - After=1970-01-01T00:00:00.000-00:00[America/Denver]
 bwvolleyball:
   hosts:
-    auth-api: ${AUTH_API_HOST:localhost}
-    spa: ${SPA_HOST:localhost}
+    auth-api:
+      domain: ${AUTH_API_HOST:localhost}
+      port: ${AUTH_API_PORT:8181}
+    recipe-api:
+      domain: ${RECIPE_API_HOST:localhost}
+      port: ${RECIPE_API_PORT:8282}
+    spa:
+      domain: ${SPA_HOST:localhost}
+      port: ${SPA_PORT:4200}
