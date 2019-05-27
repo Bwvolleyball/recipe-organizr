@@ -9,9 +9,13 @@ package io.bwvolleyball.recipe.domain
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 
-data class MealDbResponse(val meals: List<MealDbMeal>) {
+data class MealDbResponse(val meals: List<MealDbMeal>?) {
     fun toRecipes(): List<Recipe> {
-        return meals.map { it.toRecipe() }
+        return meals?.map { it.toRecipe() } ?: emptyList()
+    }
+
+    fun names(): List<String> {
+        return meals?.map{it.name()} ?: emptyList()
     }
 }
 
@@ -78,6 +82,10 @@ data class MealDbMeal(val idMeal: String,
                 video = strYoutube,
                 source = strSource,
                 ingredients = parseIngredients())
+    }
+
+    fun name(): String {
+        return strMeal
     }
 
     private fun parseInstructions(): List<String> {

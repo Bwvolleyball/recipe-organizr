@@ -11,3 +11,12 @@
   display: block;
   width: 100%;
 }
+
+.shadowed-text {
+  text-shadow: -2px -2px 4px #000,
+  2px -2px 4px #000,
+  -2px 2px 4px #000,
+  2px 2px 4px #000;
+  -webkit-font-smoothing: antialiased;
+
+}
