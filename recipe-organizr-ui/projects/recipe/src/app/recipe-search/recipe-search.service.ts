@@ -7,15 +7,11 @@ import {Recipe} from '../recipe/recipe';
   providedIn: 'root'
 })
 export class RecipeSearchService {
-  private predictionUrl = '/api/recipe/predict?limit=7&name=';
-  private searchUrl = 'api/recipe/search?name=';
+  private predictionUrl = '/api/recipe/predict?limit=%limit%&name=%name%';
+  private searchUrl = 'api/recipe/search?limit=%limit%&name=%name%';
 
   private predictionSubscription: Subscription = Subscription.EMPTY;
   private predictionSubject = new BehaviorSubject<string[]>([]);
-
-  private searchSubscription: Subscription = Subscription.EMPTY;
-  private searchSubject = new BehaviorSubject<Recipe[]>([]);
-
 
   constructor(private http: HttpClient) {
   }
@@ -24,21 +20,18 @@ export class RecipeSearchService {
     return this.predictionSubject.asObservable();
   }
 
-  predict(name: string) {
+  predict(name: string, limit: number = 7) {
     if (!this.predictionSubscription.closed) {
       this.predictionSubscription.unsubscribe();
     }
-    const url = this.predictionUrl + name;
+    const url = this.predictionUrl.replace('%limit%', limit.toString()) .replace('%name%', name);
     const next: Observable<string[]> = name.trim() === '' ? of([]) : this.http.get<string[]>(url);
 
     this.predictionSubscription = next.subscribe(results => this.predictionSubject.next(results));
   }
 
-  search(name: string): Observable<Recipe[]> {
-    if (!this.searchSubscription.closed) {
-      this.searchSubscription.unsubscribe();
-    }
-    const url = this.searchUrl + name;
+  search(name: string, limit: number = 1): Observable<Recipe[]> {
+    const url = this.searchUrl.replace('%limit%', limit.toString()).replace('%name%', name);
     return name.trim() === '' ? of([]) : this.http.get<Recipe[]>(url);
   }
 }

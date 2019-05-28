@@ -1,0 +1,25 @@
+<div class="mt-4 card mb-3">
+  <div class="card-header card-body">
+    <span class="h3">Search Results for "{{searchTerm}}"</span>
+  </div>
+  <div class="card-body">
+    <ul class="list-group mb-2" *ngFor="let recipeEntries of recipes | keyvalue">
+      <li class="list-group-item list-group-item-info h4 font-italic">{{recipeEntries?.key}}</li>
+      <li class="list-group-item list-group-item-light" [class.active]="activated?.get(recipeEntries?.key)[i]"
+          (mouseover)="activated?.get(recipeEntries?.key)[i]=true"
+          (mouseout)="activated?.get(recipeEntries?.key)[i]=false"
+          *ngFor="let recipe of recipeEntries?.value; let i = index;"
+          (click)="selectRecipe(recipe?.id)">
+        <div class="row">
+          <span class="col-3">{{recipe?.name}}</span>
+          <div class="col-2 btn btn-info">{{recipe?.locale}}</div>
+          <div class="col-7">
+            <div class="btn-group btn-group-sm">
+              <div class="btn btn-light mr-1" *ngFor="let tag of recipe?.tags">{{tag}}</div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

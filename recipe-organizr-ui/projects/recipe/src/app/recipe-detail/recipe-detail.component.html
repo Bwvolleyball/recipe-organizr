@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
       <div class="row no-gutters">
-        <img class="img-fluid col-4" [src]="recipe?.thumbnail"/>
+        <img class="img-fluid col-4" [attr.src]="(recipe?.thumbnail)" [alt]="recipe?.name"/>
         <div class="col-8">
           <ul class="list-group">
             <li class="list-group-item list-group-item-info" *ngIf="recipe?.tags?.length > 0">Tags</li>
