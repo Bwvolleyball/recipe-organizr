@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 
-@FeignClient(name = "mealDbFeignClient", url = "https://www.themealdb.com/api/json/v1/\${bwvolleyball.mealdb.api-key:1}")
+@FeignClient(name = "mealDbFeignClient", url = "https://www.themealdb.com/api/json/\${bwvolleyball.mealdb.version:v1}/\${bwvolleyball.mealdb.api-key:1}")
 interface MealDbFeignClient {
 
     @GetMapping(path = ["/search.php"])
@@ -31,6 +31,9 @@ interface MealDbFeignClient {
 
     @GetMapping(path = ["/filter.php"])
     fun findByIngredient(@RequestParam(name = "i") ingredient: String): MealDbFilterResponse
+
+    @GetMapping(path = ["/filter.php"])
+    fun findByIngredient(@RequestParam(name = "i") ingredients: List<String>): MealDbFilterResponse
 
     @GetMapping(path = ["/filter.php"])
     fun findByCategory(@RequestParam(name= "c") category: String): MealDbFilterResponse

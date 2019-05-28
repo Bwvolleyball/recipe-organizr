@@ -1,8 +1,20 @@
 <form class="col-12 hanging-search p-0 m-0" id="searchForm">
-  <div class="form-group col-4 offset-4">
+  <div class="form-group col-6 offset-3 mb-0">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder=" Search for Recipes...">
-      <span class="btn btn-secondary input-group-append"><fa-icon [icon]="faSearch"></fa-icon></span>
+      <input type="search" class="form-control" [(ngModel)]="searchName" (input)="searchUpdated()" name="searchName" id="recipe-search" placeholder=" Search for Recipes..." autofocus/>
+      <span class="btn btn-info input-group-append" (click)="searchRecipes()"><fa-icon [icon]="faSearch"></fa-icon></span>
     </div>
+    <label for="recipe-search" class="active" style="display: none;">Search for Recipes</label>
+  </div>
+  <div class="form-group col-6 offset-3 mt-0">
+    <ul class="list-group">
+      <li class="list-group-item" [class.active]="activated[i]"
+          (mouseover)="activated[i]=true"
+          (mouseout)="activated[i]=false"
+          (click)="selectRecipe(result)"
+        *ngFor="let result of searchResults; let i = index;">
+        {{result}}
+      </li>
+    </ul>
   </div>
 </form>

@@ -13,6 +13,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import { FooterComponent } from './footer/footer.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
+import {RecipeAppModule} from '../../projects/recipe/src/app/recipe-app.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { SearchBoxComponent } from './search-box/search-box.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     FontAwesomeModule,
     CarouselModule.forRoot(),
     AuthAppModule,
+    RecipeAppModule,
     // AppRoutingModule must always be the last module
     AppRoutingModule
   ],

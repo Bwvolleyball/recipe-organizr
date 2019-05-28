@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../projects/auth/src/app/user/user.service';
 import {OktaAuthService, UserClaims} from '@okta/okta-angular';
 import {Router} from '@angular/router';
+import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
 
 @Component({
   selector: 'app-navigation',
@@ -12,6 +13,8 @@ export class NavigationComponent implements OnInit {
 
   userClaims: UserClaims;
   user = 'Guest';
+
+  faHome = faHome;
 
   isAuthenticated: boolean;
 
@@ -33,7 +36,6 @@ export class NavigationComponent implements OnInit {
   }
 
   authenticatedStateChanged(isAuthenticated: boolean) {
-    console.log('New authenticated state: %s', isAuthenticated);
     this.isAuthenticated = isAuthenticated;
     if (isAuthenticated) {
       this.oktaAuth.getUser().then(user => {
