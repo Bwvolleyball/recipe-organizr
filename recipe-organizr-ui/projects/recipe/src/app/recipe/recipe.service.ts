@@ -13,7 +13,7 @@ export class RecipeService {
   constructor(private http: HttpClient) {
   }
 
-  findById(id: number): Observable<Recipe> {
+  findById(id: string): Observable<Recipe> {
     return this.http.get<Recipe>(this.recipeByIdBaseUrl + id);
   }
 }

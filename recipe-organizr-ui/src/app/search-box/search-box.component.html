@@ -1,7 +1,7 @@
 <form class="col-12 hanging-search p-0 m-0" id="searchForm">
   <div class="form-group col-6 offset-3 mb-0">
     <div class="input-group">
-      <input type="search" class="form-control" [(ngModel)]="searchName" (input)="searchUpdated()" name="searchName" id="recipe-search" placeholder=" Search for Recipes..." autofocus/>
+      <input type="search" class="form-control" [(ngModel)]="searchName" (input)="searchUpdated()" (keyup.enter)="searchRecipes()" name="searchName" id="recipe-search" placeholder=" Search for Recipes..." autofocus/>
       <span class="btn btn-info input-group-append" (click)="searchRecipes()"><fa-icon [icon]="faSearch"></fa-icon></span>
     </div>
     <label for="recipe-search" class="active" style="display: none;">Search for Recipes</label>
