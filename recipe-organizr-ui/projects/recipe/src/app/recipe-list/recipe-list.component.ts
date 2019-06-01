@@ -34,7 +34,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesSubscription = this.recipeSearchService
       .search(this.searchTerm, 25)
       .subscribe(recipes => {
+        console.log(recipes);
         this.recipes = this.groupRecipes(recipes);
+        console.log(this.recipes);
         this.activated = this.copyToActivated(this.recipes);
       });
   }
@@ -54,11 +56,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
    */
   private groupRecipes(recipes: Recipe[]): Map<string, Recipe[]> {
     const map = new Map<string, Recipe[]>();
-    recipes.reduce((_, recipe) => {
+    recipes.forEach((recipe) => {
       let list = map.get(recipe.category);
       list = RecipeListComponent.updatedList(recipe, list);
       map.set(recipe.category, list);
-      return recipe;
     });
     return map;
   }
