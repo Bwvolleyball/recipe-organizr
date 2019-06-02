@@ -42,6 +42,11 @@ It will eventually provide authorization for actions that require it. - Port 818
 3. [Recipe API](./recipe-api) - this is a microservice that integrates with a 3rd party recipes api 
 and handles some translation before service recipes to the front end. - Port 8282
 
+From the directory of each of these projects, you can run the following command to launch them:
+
+```bash
+./gradlew bootRun
+```
 
 #### Angular Application
 > The UI is written as an angular app, so running it locally relies on the angular cli.
