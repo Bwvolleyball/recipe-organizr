@@ -2,7 +2,7 @@
   <div class="card-header card-body">
     <span class="h3">Search Results for "{{searchTerm}}"</span>
   </div>
-  <div class="card-body">
+  <div class="card-body" *ngIf="recipes">
     <ul class="list-group mb-2" *ngFor="let recipeEntries of recipes | keyvalue">
       <li class="list-group-item list-group-item-info h4 font-italic">{{recipeEntries?.key}}</li>
       <li class="list-group-item list-group-item-light" [class.active]="activated?.get(recipeEntries?.key)[i]"
