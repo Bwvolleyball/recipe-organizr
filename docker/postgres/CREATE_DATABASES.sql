@@ -2,3 +2,4 @@
 
 CREATE DATABASE users;
 CREATE DATABASE recipes;
+CREATE DATABASE cookbooks;
