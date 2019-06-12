@@ -10,6 +10,10 @@ spring:
           uri: http://${bwvolleyball.hosts.recipe-api.domain}:${bwvolleyball.hosts.recipe-api.port}
           predicates:
             - Path=/api/recipe/**
+        - id: cookbook-api
+          uri: http://${bwvolleyball.hosts.cookbook-api.domain}:${bwvolleyball.hosts.cookbook-api.port}
+          predicates:
+            - Path=/api/cookbook/**
         # The default, catch-all route sends items to the Angular SPA.
         - id: spa
           uri: http://${bwvolleyball.hosts.spa.domain}:${bwvolleyball.hosts.spa.port}
@@ -23,6 +27,9 @@ bwvolleyball:
     recipe-api:
       domain: ${RECIPE_API_HOST:localhost}
       port: ${RECIPE_API_PORT:8282}
+    cookbook-api:
+      domain: ${COOKBOOK_API_HOST:localhost}
+      port: ${COOKBOOK_API_PORT:8383}
     spa:
       domain: ${SPA_HOST:localhost}
       port: ${SPA_PORT:4200}

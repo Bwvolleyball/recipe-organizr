@@ -51,6 +51,17 @@ jobs:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api . && docker push bwvolleyball/recipe-api
     - stage: compile
+      language: java
+      jdk: openjdk8
+      install: true
+      before_script:
+        - cd cookbook-api
+      script:
+        - ./gradlew build --scan -s
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api . && docker push bwvolleyball/cookbook-api
+    - stage: compile
       language: node_js
       node_js: lts/*
       before_script:
