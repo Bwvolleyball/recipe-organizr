@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../projects/auth/src/app/user/user.service';
-import {OktaAuthService, UserClaims} from '@okta/okta-angular';
+import {UserClaims} from '@okta/okta-angular';
 import {Router} from '@angular/router';
 import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
+import {LoginService} from '../../../projects/auth/src/app/login/login.service';
 
 @Component({
   selector: 'app-navigation',
@@ -18,27 +19,27 @@ export class NavigationComponent implements OnInit {
 
   isAuthenticated: boolean;
 
-  constructor(private userService: UserService, private oktaAuth: OktaAuthService, private router: Router) {
-    this.oktaAuth.$authenticationState.subscribe((isAuthenticated: boolean) => this.authenticatedStateChanged(isAuthenticated));
+  constructor(private userService: UserService, private loginService: LoginService, private router: Router) {
+    this.loginService.authenticationState().subscribe((isAuthenticated: boolean) => this.authenticatedStateChanged(isAuthenticated));
   }
 
   async ngOnInit() {
-    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    this.isAuthenticated = await this.loginService.authenticated();
     this.authenticatedStateChanged(this.isAuthenticated);
   }
 
   login() {
-    this.oktaAuth.loginRedirect('/profile');
+    this.loginService.loginAttempt();
   }
 
   logout() {
-    this.oktaAuth.logout().then(() => this.router.navigateByUrl('/'));
+    this.loginService.logout().then(() => this.router.navigateByUrl('/'));
   }
 
   authenticatedStateChanged(isAuthenticated: boolean) {
     this.isAuthenticated = isAuthenticated;
     if (isAuthenticated) {
-      this.oktaAuth.getUser().then(user => {
+      this.loginService.oktaUser().then(user => {
         this.userClaims = user;
         this.user = this.userClaims.given_name;
       });

@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import {RecipeAppModule} from '../../projects/recipe/src/app/recipe-app.module';
 import {FormsModule} from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {FormsModule} from '@angular/forms';
     AppRoutingModule
   ],
   providers: [
-    UserService
+    UserService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
