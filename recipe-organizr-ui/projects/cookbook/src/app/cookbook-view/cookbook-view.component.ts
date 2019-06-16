@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 
+class NamedRecipe {
+  recipeId = '';
+  recipeName = '';
+}
+
 @Component({
   selector: 'cookbook-cookbook-view',
   templateUrl: './cookbook-view.component.html',
@@ -27,17 +32,12 @@ export class CookbookViewComponent implements OnInit {
     }
   }
 
-  attachName(recipeId: string, recipeName: string){
-    for (const recipe of this.sortedRecipes){
-      if (recipe.recipeId === recipeId){
+  attachName(recipeId: string, recipeName: string) {
+    for (const recipe of this.sortedRecipes) {
+      if (recipe.recipeId === recipeId) {
         recipe.recipeName = recipeName;
       }
     }
     this.sortedRecipes.sort((a, b) => a.recipeName.localeCompare(b.recipeName));
   }
-}
-
-class NamedRecipe {
-  recipeId = '';
-  recipeName = '';
 }

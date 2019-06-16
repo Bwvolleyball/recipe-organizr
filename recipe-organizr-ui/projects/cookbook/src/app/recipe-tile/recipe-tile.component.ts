@@ -21,7 +21,7 @@ export class RecipeTileComponent implements OnInit {
     this.recipeService.findById(this.recipeId).subscribe(recipe => this.receiveRecipe(recipe));
   }
 
-  private receiveRecipe(recipe: Recipe){
+  private receiveRecipe(recipe: Recipe) {
     this.recipe = recipe;
     this.recipeNameEmitter.emit(recipe.name);
   }
