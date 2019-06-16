@@ -400,6 +400,138 @@
           }
         }
       }
+    },
+    "cookbook": {
+      "root": "projects/cookbook/",
+      "sourceRoot": "projects/cookbook/src",
+      "projectType": "application",
+      "prefix": "cookbook",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cookbook",
+            "index": "projects/cookbook/src/index.html",
+            "main": "projects/cookbook/src/main.ts",
+            "polyfills": "projects/cookbook/src/polyfills.ts",
+            "tsConfig": "projects/cookbook/tsconfig.app.json",
+            "assets": [
+              "projects/cookbook/src/favicon.ico",
+              "projects/cookbook/src/assets"
+            ],
+            "styles": [
+              "projects/cookbook/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cookbook/src/environments/environment.ts",
+                  "with": "projects/cookbook/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cookbook:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cookbook:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cookbook:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cookbook/src/test.ts",
+            "polyfills": "projects/cookbook/src/polyfills.ts",
+            "tsConfig": "projects/cookbook/tsconfig.spec.json",
+            "karmaConfig": "projects/cookbook/karma.conf.js",
+            "styles": [
+              "projects/cookbook/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/cookbook/src/favicon.ico",
+              "projects/cookbook/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cookbook/tsconfig.app.json",
+              "projects/cookbook/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "cookbook-e2e": {
+      "root": "projects/cookbook-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/cookbook-e2e/protractor.conf.js",
+            "devServerTarget": "cookbook:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cookbook:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/cookbook-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "recipe-organizr-ui"
