@@ -7,4 +7,4 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "cookbooks")
-data class Cookbook(@Id val userId: String, @ElementCollection val recipes: List<String> = emptyList())
+data class Cookbook(@Id val userId: String, @ElementCollection val recipes: Set<String> = emptySet())

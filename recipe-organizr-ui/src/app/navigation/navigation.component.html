@@ -2,6 +2,7 @@
   <a class="navbar-brand nav-link text-light" routerLink="/" href="#"><fa-icon [icon]="faHome"></fa-icon> Recipe Organizr</a>
   <ul class="navbar-nav">
     <li class="nav-item"><a class="nav-link text-light" href="#" routerLink="/recipe/detail/random">Random Recipe</a></li>
+    <li class="nav-item" [hidden]="!isAuthenticated"><a class="nav-link text-light" routerLink="/cookbook/view">My Cookbook</a></li>
     <li class="nav-item" [hidden]="!isAuthenticated"><a class="nav-link text-light" routerLink="/auth/profile">Profile</a></li>
   </ul>
   <ul class="navbar-nav ml-auto">
