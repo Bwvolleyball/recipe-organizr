@@ -28,3 +28,7 @@ feign:
     config:
       mealDbFeignClient:
         loggerLevel: full
+
+bwvolleyball:
+  database:
+    host: ${DATABASE_HOST:localhost}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as OktaSignIn from '@okta/okta-signin-widget';
 import {OktaAuthService} from '@okta/okta-angular';
 import {NavigationStart, Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {ATTEMPTED_URL} from '../auth/auth.guard.service';
 
 @Component({
   selector: 'auth-secure-login',
@@ -45,7 +47,7 @@ export class SecureLoginComponent implements OnInit {
       registration: true
     }
   });
-  constructor(oktaAuth: OktaAuthService, private router: Router) {
+  constructor(oktaAuth: OktaAuthService, private router: Router, private cookieService: CookieService) {
     this.signIn = oktaAuth;
 
     oktaAuth.isAuthenticated().then(isAuthenticated => {
@@ -65,12 +67,15 @@ export class SecureLoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signIn.setFromUri('/auth/profile');
+    // attempt to redirect them to the place they were going, otherwise send them to their profile page.
+    const path = this.cookieService.check(ATTEMPTED_URL) ? decodeURI(this.cookieService.get(ATTEMPTED_URL)) : '/auth/profile';
+
+    this.signIn.setFromUri(path);
     this.widget.renderEl({
       el: '#okta-signin-container'},
       (res) => {
         if (res.status === 'SUCCESS') {
-          this.signIn.loginRedirect('/auth/profile', {sessionToken: res.session.token });
+          this.signIn.loginRedirect(path, {sessionToken: res.session.token });
           this.widget.hide();
         }
       },

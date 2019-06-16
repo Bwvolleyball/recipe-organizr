@@ -6,6 +6,7 @@ import {RecipeAppComponent} from './recipe-app.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import {TooltipModule} from 'ngx-bootstrap';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import {CookbookAppModule} from '../../../cookbook/src/app/cookbook.module';
 
 
 @NgModule({
@@ -17,9 +18,11 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
   imports: [
     BrowserModule,
     RecipeAppRoutingModule,
-    TooltipModule
+    TooltipModule,
+    CookbookAppModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [RecipeAppComponent]
 })
 export class RecipeAppModule { }

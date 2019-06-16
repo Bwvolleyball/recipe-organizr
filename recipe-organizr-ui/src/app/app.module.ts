@@ -16,6 +16,7 @@ import { SearchBoxComponent } from './search-box/search-box.component';
 import {RecipeAppModule} from '../../projects/recipe/src/app/recipe-app.module';
 import {FormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
+import {CookbookAppModule} from '../../projects/cookbook/src/app/cookbook.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {CookieService} from 'ngx-cookie-service';
     CarouselModule.forRoot(),
     AuthAppModule,
     RecipeAppModule,
+    CookbookAppModule,
     // AppRoutingModule must always be the last module
     AppRoutingModule
   ],
