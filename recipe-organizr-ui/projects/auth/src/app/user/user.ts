@@ -7,7 +7,7 @@ export class User {
               public readonly email: string,
               public readonly username: string,
               public readonly name: string,
-              public readonly lastLogin: string){}
+              public readonly lastLogin: string) {}
 
   public static fromCookieString(cookieString: string): User {
     const decodedString = atob(cookieString);
