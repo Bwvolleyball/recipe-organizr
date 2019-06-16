@@ -6,12 +6,15 @@ import { CookbookComponent } from './cookbook.component';
 import { CookbookViewComponent } from './cookbook-view/cookbook-view.component';
 import { AddToCookbookBtnComponent } from './add-to-cookbook-btn/add-to-cookbook-btn.component';
 import {TooltipModule} from 'ngx-bootstrap';
+import {RecipeAppModule} from '../../../recipe/src/app/recipe-app.module';
+import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
 
 @NgModule({
   declarations: [
     CookbookComponent,
     CookbookViewComponent,
-    AddToCookbookBtnComponent
+    AddToCookbookBtnComponent,
+    RecipeTileComponent
   ],
   imports: [
     BrowserModule,
