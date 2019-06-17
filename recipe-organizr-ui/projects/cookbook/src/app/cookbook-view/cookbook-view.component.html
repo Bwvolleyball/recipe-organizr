@@ -1,6 +1,11 @@
 <div class="card-deck">
   <div *ngFor="let recipe of sortedRecipes">
-    <cookbook-recipe-tile class="mr-1 mt-3 btn btn-outline-primary no-gutters" [recipeId]="recipe.recipeId" (recipeNameEmitter)="attachName(recipe.recipeId, $event)"></cookbook-recipe-tile>
+    <cookbook-recipe-tile class="mr-1 mt-3 mb-1 btn btn-outline-primary no-gutters"
+                          [routerLink]="'/recipe/detail/' + recipe.recipeId"
+                          [recipeId]="recipe.recipeId"
+                          (recipeNameEmitter)="attachName(recipe.recipeId, $event)">
+
+    </cookbook-recipe-tile>
   </div>
 </div>
 <div *ngIf="cookbook && cookbook?.recipes.length == 0">
