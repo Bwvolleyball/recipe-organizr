@@ -41,6 +41,9 @@ The following spring boot microservices must be run:
 It will eventually provide authorization for actions that require it. - Port 8181
 3. [Recipe API](./recipe-api) - this is a microservice that integrates with a 3rd party recipes api 
 and handles some translation before service recipes to the front end. - Port 8282
+4. [Cookbook API](./cookbook-api) - this is a microservice that allows users to save and view their own cookbook - 
+essentially just a collection of recipes.  It currently creates a cookbook with a list of recipe ids, associated to 
+a specific user.
 
 From the directory of each of these projects, you can run the following command to launch them:
 
