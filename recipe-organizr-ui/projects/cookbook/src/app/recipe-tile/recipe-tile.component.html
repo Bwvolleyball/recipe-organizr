@@ -1,9 +1,9 @@
-<div class="card" [routerLink]="'/recipe/detail/' + recipeId" >
+<div class="card">
   <div class="card-header text-center">
     <span class="card-title card-text text-primary h5">{{recipe?.name}}</span>
   </div>
   <div class="card-body">
-    <img class="img-fluid" [attr.src]="(recipe?.thumbnail)" [alt]="recipe?.name">
+    <img class="img-fluid" [attr.src]="(recipe?.thumbnail)" [attr.alt]="recipe?.name">
   </div>
   <div class="card-footer card-body">
     <div class="row mt-1 ml-1 mr-1">
