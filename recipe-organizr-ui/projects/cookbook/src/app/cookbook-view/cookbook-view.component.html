@@ -1,9 +1,9 @@
 <div class="row">
-  <div *ngFor="let recipe of mappedRecipes | keyvalue: nameComparator" class="col-4 mt-3 mb-1 btn btn-outline-primary">
+  <div *ngFor="let recipe of asArray(mappedRecipes.values())" class="col-4 mt-3 mb-1 btn btn-outline-primary">
     <cookbook-recipe-tile
-      [routerLink]="'/recipe/detail/' + recipe.key"
-      [recipeId]="recipe.key"
-      (recipeNameEmitter)="attachName(recipe.key, $event)"
+      [routerLink]="'/recipe/detail/' + recipe.recipeId"
+      [recipeId]="recipe.recipeId"
+      (recipeNameEmitter)="attachName(recipe.recipeId, $event)"
       (deleteEmitter)="deleteRecipe($event)">
     </cookbook-recipe-tile>
   </div>

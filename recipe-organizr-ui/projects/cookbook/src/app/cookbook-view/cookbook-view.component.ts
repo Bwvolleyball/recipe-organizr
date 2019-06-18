@@ -22,9 +22,9 @@ export class CookbookViewComponent implements OnInit {
   cookbook: Cookbook;
   mappedRecipes = new Map<string, NamedRecipe>();
 
-  nameComparator = (a: KeyValue<string, NamedRecipe>, b: KeyValue<string, NamedRecipe>): number => {
+  nameComparatsor = (a: KeyValue<string, NamedRecipe>, b: KeyValue<string, NamedRecipe>): number => {
     return a.value.compare(b.value);
-  };
+  }
 
   constructor(private cookbookService: CookbookService) {
   }
@@ -40,13 +40,12 @@ export class CookbookViewComponent implements OnInit {
       namedRecipe.recipeId = recipe;
       this.mappedRecipes.set(recipe, namedRecipe);
     }
+    this.sortRecipes();
   }
 
   attachName(recipeId: string, recipeName: string) {
-    const namedRecipe = this.mappedRecipes.get(recipeId);
-    namedRecipe.recipeName = recipeName;
-
-    this.mappedRecipes.set(recipeId, namedRecipe);
+    this.mappedRecipes.get(recipeId).recipeName = recipeName;
+    this.sortRecipes();
   }
 
   deleteRecipe(recipeId: string) {
@@ -57,5 +56,16 @@ export class CookbookViewComponent implements OnInit {
       recipes: Array.from(this.mappedRecipes.values()).map(recipe => recipe.recipeId)
     };
     this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
+    this.sortRecipes();
+  }
+
+  private sortRecipes() {
+    const entries = Array.from(this.mappedRecipes.entries());
+    this.mappedRecipes = new Map<string, NamedRecipe>([...entries]
+      .sort((a, b) => a[1].compare(b[1])));
+  }
+
+  private asArray<V>(values: IterableIterator<V>): Array<V> {
+    return Array.from(values);
   }
 }
