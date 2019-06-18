@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
+import {KeyValue} from '@angular/common';
 
 class NamedRecipe {
   recipeId = '';
   recipeName = '';
+
+  compare(other: NamedRecipe): number {
+    return this.recipeName.localeCompare(other.recipeName);
+  }
 }
 
 @Component({
@@ -15,9 +20,10 @@ class NamedRecipe {
 export class CookbookViewComponent implements OnInit {
 
   cookbook: Cookbook;
-  sortedRecipes = new Array<NamedRecipe>();
+  mappedRecipes = new Map<string, NamedRecipe>();
 
-  constructor(private cookbookService: CookbookService) { }
+  constructor(private cookbookService: CookbookService) {
+  }
 
   ngOnInit() {
     this.cookbookService.getCookbook().subscribe(cookbook => this.receiveCookbook(cookbook));
@@ -28,16 +34,34 @@ export class CookbookViewComponent implements OnInit {
     for (const recipe of cookbook.recipes) {
       const namedRecipe = new NamedRecipe();
       namedRecipe.recipeId = recipe;
-      this.sortedRecipes.push(namedRecipe);
+      this.mappedRecipes.set(recipe, namedRecipe);
     }
+    this.sortRecipes();
+  }
+
+  asArray<V>(values: IterableIterator<V>): Array<V> {
+    return Array.from(values);
   }
 
   attachName(recipeId: string, recipeName: string) {
-    for (const recipe of this.sortedRecipes) {
-      if (recipe.recipeId === recipeId) {
-        recipe.recipeName = recipeName;
-      }
-    }
-    this.sortedRecipes.sort((a, b) => a.recipeName.localeCompare(b.recipeName));
+    this.mappedRecipes.get(recipeId).recipeName = recipeName;
+    this.sortRecipes();
+  }
+
+  deleteRecipe(recipeId: string) {
+    this.mappedRecipes.delete(recipeId);
+
+    const updatedCookbook: Cookbook = {
+      userId: this.cookbook.userId,
+      recipes: Array.from(this.mappedRecipes.values()).map(recipe => recipe.recipeId)
+    };
+    this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
+    this.sortRecipes();
+  }
+
+  private sortRecipes() {
+    const entries = Array.from(this.mappedRecipes.entries());
+    this.mappedRecipes = new Map<string, NamedRecipe>([...entries]
+      .sort((a, b) => a[1].compare(b[1])));
   }
 }

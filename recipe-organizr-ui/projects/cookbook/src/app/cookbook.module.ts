@@ -8,6 +8,7 @@ import { AddToCookbookBtnComponent } from './add-to-cookbook-btn/add-to-cookbook
 import {TooltipModule} from 'ngx-bootstrap';
 import {RecipeAppModule} from '../../../recipe/src/app/recipe-app.module';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     CookbookRoutingModule,
     TooltipModule
   ],

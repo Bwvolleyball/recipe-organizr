@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card h-100">
   <div class="card-header text-center">
     <span class="card-title card-text text-primary h5">{{recipe?.name}}</span>
   </div>
@@ -7,13 +7,19 @@
   </div>
   <div class="card-footer card-body">
     <div class="row mt-1 ml-1 mr-1">
-      <div class="btn btn-outline-primary mr-1 disabled">{{recipe?.locale}}</div>
-      <div class="btn btn-outline-dark mr-1 disabled">{{recipe?.category}}</div>
+      <div *ngIf="recipe?.locale" class="btn btn-outline-primary mr-1 mb-1">{{recipe?.locale}}</div>
+      <div *ngIf="!recipe?.locale" class="btn btn-outline-danger mr-1 mb-1 disabled">No Locale</div>
+      <div *ngIf="recipe?.category" class="btn btn-outline-dark mr-1 mb-1">{{recipe?.category}}</div>
+      <div *ngIf="!recipe?.category" class="btn btn-outline-danger mr-1 mb-1 disabled">No Category</div>
     </div>
     <div class="row mt-1 ml-1 mr-1">
       <div *ngFor="let tag of recipe?.tags">
-        <div class="btn btn-outline-info mr-1 disabled">{{tag}}</div>
+        <div class="btn btn-outline-info mr-1 mt-1">{{tag}}</div>
       </div>
+      <div *ngIf="recipe?.tags?.length === 0" class="btn btn-outline-danger mr-1 disabled">No Tags</div>
     </div>
   </div>
+  <div class="card-footer"><span class="col-2 offset-10 btn btn-outline-danger text-center" tooltip="Delete" (click)="deleteMe($event)">
+      <fa-icon class="mx-auto my-auto" [icon]="faTrash"></fa-icon>
+    </span></div>
 </div>
