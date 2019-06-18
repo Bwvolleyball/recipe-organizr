@@ -30,7 +30,6 @@ export class AddToCookbookBtnComponent implements OnInit {
     if (this.isEnabled) {
       this.cookbook.recipes.push(this.recipeId);
       this.cookbookService.saveCookbook(this.cookbook).subscribe(cookbook => this.receiveCookbook(cookbook));
-      console.log('saved cookbook: %o', this.cookbook);
     }
   }
 
