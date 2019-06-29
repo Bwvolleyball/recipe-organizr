@@ -1,36 +1,42 @@
 <div class="row mt-3 mb-1">
   <div class="card w-100">
     <div class="card-header card-text text-center">
-      <span class="h3 text-info">Filters / Search</span>
+      <span class="h3 text-info">Filters</span>
     </div>
     <div class="card-body">
-      <div class="row mt-1 mb-1">
-        <div class="btn-group" btnRadioGroup [(ngModel)]="selectedLocale">
-          <span class="input-group-text">Locale</span>
-          <button *ngFor="let locale of localeSet" class="btn btn-outline-primary" uncheckable [btnRadio]="locale">{{locale}}</button>
+      <div class="mt-1 mb-1">
+        <span class="input-group-text row">Locale</span>
+        <div class="btn-group flex-wrap" btnRadioGroup [(ngModel)]="selectedLocale">
+          <button *ngFor="let locale of asArray(localeSet.values()).sort()"
+                  class="tight-btn btn btn-outline-primary mx-1 my-1" uncheckable [btnRadio]="locale">{{locale}}</button>
         </div>
       </div>
-      <div class="row mt-1 mb-1">
-        <div class="btn-group" btnRadioGroup [(ngModel)]="selectedCategory">
-          <span class="input-group-text">Category</span>
-          <button *ngFor="let category of categorySet" class="btn btn-outline-dark" uncheckable [btnRadio]="category">{{category}}</button>
+      <div class="mt-1 mb-1">
+        <span class="input-group-text row">Category</span>
+        <div class="btn-group flex-wrap" btnRadioGroup [(ngModel)]="selectedCategory">
+          <button *ngFor="let category of asArray(categorySet.values()).sort()"
+                  class="tight-btn btn btn-outline-dark mx-1 my-1" uncheckable [btnRadio]="category">{{category}}</button>
         </div>
       </div>
-      <div class="row mt-1 mb-1">
-        <div class="btn-group" btnRadioGroup>
-          <span class="input-group-text">Tags</span>
-          <button *ngFor="let tag of tagsSet" class="btn btn-outline-info" btnCheckbox [(ngModel)]="selectedTags[tag]">{{tag}}</button>
+      <div class="mt-1 mb-1">
+        <span class="input-group-text row">Tags</span>
+        <div class="btn-group flex-wrap" btnRadioGroup>
+          <button *ngFor="let tag of asArray(tagsSet.values()).sort()" class="tight-btn btn btn-outline-info mx-1 my-1"
+                  btnCheckbox [(ngModel)]="selectedTags[tag]" (click)="captureTags()">{{tag}}</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="row">
-  <div *ngFor="let recipe of asArray(mappedRecipes.values())" class="col-4 mt-3 mb-1 btn btn-outline-primary">
+  <div *ngFor="let recipe of asArray(mappedRecipes.values())" [hidden]="!visibilityMatrix.get(recipe.recipeId)"
+       class="col-4 mt-3 mb-1 btn btn-outline-primary">
     <cookbook-recipe-tile
       [routerLink]="'/recipe/detail/' + recipe.recipeId"
       [recipeId]="recipe.recipeId"
+      [filters]="[selectedLocale, selectedCategory, selectedTagsString]"
       (recipeEmitter)="recipeEventReceiver(recipe.recipeId, $event)"
+      (visibleEmitter)="receiveVisibility($event)"
       (deleteEmitter)="deleteRecipe($event)">
     </cookbook-recipe-tile>
   </div>
