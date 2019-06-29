@@ -5,10 +5,11 @@ import { CookbookRoutingModule } from './cookbook-routing.module';
 import { CookbookComponent } from './cookbook.component';
 import { CookbookViewComponent } from './cookbook-view/cookbook-view.component';
 import { AddToCookbookBtnComponent } from './add-to-cookbook-btn/add-to-cookbook-btn.component';
-import {TooltipModule} from 'ngx-bootstrap';
+import {ButtonsModule, TooltipModule} from 'ngx-bootstrap';
 import {RecipeAppModule} from '../../../recipe/src/app/recipe-app.module';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     BrowserModule,
     FontAwesomeModule,
     CookbookRoutingModule,
-    TooltipModule
+    TooltipModule,
+    ButtonsModule,
+    FormsModule
   ],
   providers: [],
   exports: [

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
-import {KeyValue} from '@angular/common';
+import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
 
 class NamedRecipe {
   recipeId = '';
@@ -10,6 +10,10 @@ class NamedRecipe {
   compare(other: NamedRecipe): number {
     return this.recipeName.localeCompare(other.recipeName);
   }
+}
+
+interface LooseObject {
+  [key: string]: boolean;
 }
 
 @Component({
@@ -21,6 +25,17 @@ export class CookbookViewComponent implements OnInit {
 
   cookbook: Cookbook;
   mappedRecipes = new Map<string, NamedRecipe>();
+  localeSet = new Set<string>();
+  categorySet = new Set<string>();
+  tagsSet = new Set<string>();
+
+  selectedLocale: string;
+  selectedCategory: string;
+  selectedTags: LooseObject = {};
+  selectedTagsString: string;
+
+  visibilityMatrix = new Map<string, boolean>();
+  anyVisible = true;
 
   constructor(private cookbookService: CookbookService) {
   }
@@ -43,9 +58,27 @@ export class CookbookViewComponent implements OnInit {
     return Array.from(values);
   }
 
-  attachName(recipeId: string, recipeName: string) {
-    this.mappedRecipes.get(recipeId).recipeName = recipeName;
+  recipeEventReceiver(recipeId: string, recipe: Recipe) {
+    this.mappedRecipes.get(recipeId).recipeName = recipe.name;
     this.sortRecipes();
+    this.buildClickableFilters(recipe);
+  }
+
+  captureTags() {
+    const selected = new Array<string>();
+    this.tagsSet.forEach(tag => {
+      const isSelected = this.selectedTags[tag];
+      if (isSelected) {
+        selected.push(tag);
+      }
+    });
+    const finalTags = selected.toString();
+    this.selectedTagsString = finalTags.trim().length > 0 ? finalTags : undefined;
+  }
+
+  receiveVisibility(visibliityPair: [string, boolean]) {
+    this.visibilityMatrix.set(visibliityPair[0], visibliityPair[1]);
+    this.anyVisible = Array.from(this.visibilityMatrix.values()).some( visible => visible === true);
   }
 
   deleteRecipe(recipeId: string) {
@@ -63,5 +96,14 @@ export class CookbookViewComponent implements OnInit {
     const entries = Array.from(this.mappedRecipes.entries());
     this.mappedRecipes = new Map<string, NamedRecipe>([...entries]
       .sort((a, b) => a[1].compare(b[1])));
+  }
+
+  private buildClickableFilters(recipe: Recipe) {
+    this.localeSet.add(recipe.locale);
+    this.categorySet.add(recipe.category);
+    recipe.tags.map(value => {
+      this.tagsSet.add(value);
+      this.selectedTags[value] = false;
+    });
   }
 }

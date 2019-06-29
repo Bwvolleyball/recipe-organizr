@@ -10,11 +10,30 @@ import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 })
 export class RecipeTileComponent implements OnInit {
 
+  isVisible = true;
+
   @Input() recipeId: string;
 
-  @Output() recipeNameEmitter = new EventEmitter<string>();
+  // locale, category, tags
+  @Input() set filters(filters: [string, string, string]) {
+    const locale = filters[0];
+    const category = filters[1];
+    const tagsString = filters[2];
+    const tags = tagsString === undefined ? undefined : tagsString.split(',');
+
+    const localeMatch = locale === undefined ? true : this.recipe.locale === locale;
+    const categoryMatch = category === undefined ? true : this.recipe.category === category;
+    const tagsMatch = tags === undefined ? true : this.tagsMatch(tags);
+
+    this.isVisible = localeMatch && categoryMatch && tagsMatch;
+    this.visibleEmitter.emit([this.recipeId, this.isVisible]);
+  }
 
   @Output() deleteEmitter = new EventEmitter<string>();
+
+  @Output() recipeEmitter = new EventEmitter<Recipe>();
+
+  @Output() visibleEmitter = new EventEmitter<[string, boolean]>();
 
   faTrash = faTrash;
 
@@ -33,6 +52,11 @@ export class RecipeTileComponent implements OnInit {
 
   private receiveRecipe(recipe: Recipe) {
     this.recipe = recipe;
-    this.recipeNameEmitter.emit(recipe.name);
+    this.recipeEmitter.emit(recipe);
+  }
+
+  private tagsMatch(tags: string[]): boolean {
+    const rTags = this.recipe.tags;
+    return tags.every(v => rTags.includes(v));
   }
 }
