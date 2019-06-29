@@ -6,6 +6,21 @@
 
 [![Build Status](https://travis-ci.org/Bwvolleyball/recipe-organizr.svg?branch=master)](https://travis-ci.org/Bwvolleyball/recipe-organizr)
 
+## Application Architecture
+> For a more comprehensive documen about this application's archietecture, view the [Project Proposal](./docs/PROJECT_PROPOSAL.md).
+
+The Gateway is an API gateway, Spring Boot project that handles routing and load balancing.
+
+The View layer is an Angular App with 3 distinct components, auth, recipe, and cookbook.
+
+The API layer is comprised of Spring Boot applications for auth, recipes, and cookbooks.
+
+The Data layer is a Postgres database, which each API that requires it has it's own database within.
+
+This is the architecture diagram for this project:
+
+![Application Architecture](./docs/images/Recipe_Organizr_Architecture.png)
+
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
 
@@ -43,7 +58,7 @@ It will eventually provide authorization for actions that require it. - Port 818
 and handles some translation before service recipes to the front end. - Port 8282
 4. [Cookbook API](./cookbook-api) - this is a microservice that allows users to save and view their own cookbook - 
 essentially just a collection of recipes.  It currently creates a cookbook with a list of recipe ids, associated to 
-a specific user.
+a specific user. - Port 8383
 
 From the directory of each of these projects, you can run the following command to launch them:
 

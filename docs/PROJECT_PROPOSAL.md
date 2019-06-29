@@ -48,7 +48,7 @@ As alluded to earlier, I desire a strong separation of concerns, along with smal
 The precise means of communication between these apps is still to be determined, but I believe the statefulness of the browser can play a great role in keeping just enough information to tie all the pieces together via reference points such as ids.
 Here is the initial proposal for the architecture of this application.
 
-![Application Architecture](./images/application_architecture.svg)
+![Application Architecture](./images/Recipe_Organizr_Architecture.png)
 
 ##### Gateway
 
