@@ -1,9 +1,36 @@
+<div class="row mt-3 mb-1">
+  <div class="card w-100">
+    <div class="card-header card-text text-center">
+      <span class="h3 text-info">Filters / Search</span>
+    </div>
+    <div class="card-body">
+      <div class="row mt-1 mb-1">
+        <div class="btn-group" btnRadioGroup [(ngModel)]="selectedLocale">
+          <span class="input-group-text">Locale</span>
+          <button *ngFor="let locale of localeSet" class="btn btn-outline-primary" uncheckable [btnRadio]="locale">{{locale}}</button>
+        </div>
+      </div>
+      <div class="row mt-1 mb-1">
+        <div class="btn-group" btnRadioGroup [(ngModel)]="selectedCategory">
+          <span class="input-group-text">Category</span>
+          <button *ngFor="let category of categorySet" class="btn btn-outline-dark" uncheckable [btnRadio]="category">{{category}}</button>
+        </div>
+      </div>
+      <div class="row mt-1 mb-1">
+        <div class="btn-group" btnRadioGroup>
+          <span class="input-group-text">Tags</span>
+          <button *ngFor="let tag of tagsSet" class="btn btn-outline-info" btnCheckbox [(ngModel)]="selectedTags[tag]">{{tag}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div *ngFor="let recipe of asArray(mappedRecipes.values())" class="col-4 mt-3 mb-1 btn btn-outline-primary">
     <cookbook-recipe-tile
       [routerLink]="'/recipe/detail/' + recipe.recipeId"
       [recipeId]="recipe.recipeId"
-      (recipeNameEmitter)="attachName(recipe.recipeId, $event)"
+      (recipeEmitter)="recipeEventReceiver(recipe.recipeId, $event)"
       (deleteEmitter)="deleteRecipe($event)">
     </cookbook-recipe-tile>
   </div>

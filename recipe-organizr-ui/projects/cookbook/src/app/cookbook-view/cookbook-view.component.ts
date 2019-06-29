@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
-import {KeyValue} from '@angular/common';
+import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
 
 class NamedRecipe {
   recipeId = '';
@@ -10,6 +10,10 @@ class NamedRecipe {
   compare(other: NamedRecipe): number {
     return this.recipeName.localeCompare(other.recipeName);
   }
+}
+
+interface LooseObject {
+  [key: string]: boolean;
 }
 
 @Component({
@@ -21,6 +25,13 @@ export class CookbookViewComponent implements OnInit {
 
   cookbook: Cookbook;
   mappedRecipes = new Map<string, NamedRecipe>();
+  localeSet = new Set<string>();
+  categorySet = new Set<string>();
+  tagsSet = new Set<string>();
+
+  selectedLocale: string = null;
+  selectedCategory: string = null;
+  selectedTags: LooseObject = {};
 
   constructor(private cookbookService: CookbookService) {
   }
@@ -43,9 +54,19 @@ export class CookbookViewComponent implements OnInit {
     return Array.from(values);
   }
 
-  attachName(recipeId: string, recipeName: string) {
-    this.mappedRecipes.get(recipeId).recipeName = recipeName;
+  recipeEventReceiver(recipeId: string, recipe: Recipe) {
+    this.mappedRecipes.get(recipeId).recipeName = recipe.name;
     this.sortRecipes();
+    this.buildClickableFilters(recipe);
+  }
+
+  private buildClickableFilters(recipe: Recipe) {
+    this.localeSet.add(recipe.locale);
+    this.categorySet.add(recipe.category);
+    recipe.tags.map(value => {
+      this.tagsSet.add(value);
+      this.selectedTags[value] = false;
+    });
   }
 
   deleteRecipe(recipeId: string) {

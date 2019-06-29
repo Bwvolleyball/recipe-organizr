@@ -12,9 +12,9 @@ export class RecipeTileComponent implements OnInit {
 
   @Input() recipeId: string;
 
-  @Output() recipeNameEmitter = new EventEmitter<string>();
-
   @Output() deleteEmitter = new EventEmitter<string>();
+
+  @Output() recipeEmitter = new EventEmitter<Recipe>();
 
   faTrash = faTrash;
 
@@ -33,6 +33,6 @@ export class RecipeTileComponent implements OnInit {
 
   private receiveRecipe(recipe: Recipe) {
     this.recipe = recipe;
-    this.recipeNameEmitter.emit(recipe.name);
+    this.recipeEmitter.emit(recipe);
   }
 }
