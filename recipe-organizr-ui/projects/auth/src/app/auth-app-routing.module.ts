@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {OktaCallbackComponent, OktaAuthGuard} from '@okta/okta-angular';
+import {OktaCallbackComponent} from '@okta/okta-angular';
 import {SecureLoginComponent} from './secure-login/secure-login.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AuthGuard} from './auth/auth.guard.service';
