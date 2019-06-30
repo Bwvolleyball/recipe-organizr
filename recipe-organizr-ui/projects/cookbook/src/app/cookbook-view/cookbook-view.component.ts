@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
+import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
 
 class NamedRecipe {
   recipeId = '';
@@ -37,7 +38,7 @@ export class CookbookViewComponent implements OnInit {
   visibilityMatrix = new Map<string, boolean>();
   anyVisible = true;
 
-  constructor(private cookbookService: CookbookService) {
+  constructor(private cookbookService: CookbookService, private recipeService: RecipeService) {
   }
 
   ngOnInit() {
@@ -90,6 +91,7 @@ export class CookbookViewComponent implements OnInit {
     };
     this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
     this.sortRecipes();
+    this.rebuildClickableFilters();
   }
 
   private sortRecipes() {
@@ -105,5 +107,14 @@ export class CookbookViewComponent implements OnInit {
       this.tagsSet.add(value);
       this.selectedTags[value] = false;
     });
+  }
+
+  private rebuildClickableFilters() {
+    this.localeSet = new Set<string>();
+    this.categorySet = new Set<string>();
+    this.tagsSet = new Set<string>();
+    Array.from(this.mappedRecipes.keys())
+      .map(recipeId => this.recipeService.findById(recipeId))
+      .map(rObservable => rObservable.subscribe(recipe => this.buildClickableFilters(recipe)));
   }
 }
