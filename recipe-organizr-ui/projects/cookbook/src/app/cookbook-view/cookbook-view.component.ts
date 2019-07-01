@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
-import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service'
+import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
 
 class NamedRecipe {
   recipeId = '';
@@ -95,6 +95,10 @@ export class CookbookViewComponent implements OnInit {
       this.hideShowFilterBtnClass = 'btn-outline-danger';
       this.hideShowFiltersText = 'Hide';
     }
+  }
+
+  empty(...strings: string[]): boolean {
+    return strings.some(value => value && value.length > 0);
   }
 
   clearFilters() {

@@ -3,6 +3,7 @@
     <div class="card-header card-text text-center">
       <button class="btn float-left" [ngClass]="hideShowFilterBtnClass" (click)="toggleFilters()">{{hideShowFiltersText}}</button>
       <span class="h3 text-info">Filters</span>
+      <button class="btn btn-outline-danger float-right" [hidden]="!empty(selectedLocale, selectedCategory, selectedTagsString)" (click)="clearFilters()">Reset</button>
     </div>
     <div class="card-body" [collapse]="isSearchCollapsed" [isAnimated]="true">
       <div class="mt-1 mb-1" [hidden]="localeSet?.size === 0">

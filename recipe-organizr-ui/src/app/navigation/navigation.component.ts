@@ -20,7 +20,10 @@ export class NavigationComponent implements OnInit {
 
   isAuthenticated: boolean;
 
-  constructor(private userService: UserService, private preLoginService: PreLoginService, private loginService: LoginService, private router: Router) {
+  constructor(private userService: UserService,
+              private preLoginService: PreLoginService,
+              private loginService: LoginService,
+              private router: Router) {
     this.loginService.authenticationState().subscribe((isAuthenticated: boolean) => this.authenticatedStateChanged(isAuthenticated));
   }
 
