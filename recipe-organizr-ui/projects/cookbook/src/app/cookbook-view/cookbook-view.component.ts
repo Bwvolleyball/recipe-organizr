@@ -1,8 +1,8 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
-import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
+import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service'
 
 class NamedRecipe {
   recipeId = '';
@@ -29,6 +29,10 @@ export class CookbookViewComponent implements OnInit {
   localeSet = new Set<string>();
   categorySet = new Set<string>();
   tagsSet = new Set<string>();
+
+  isSearchCollapsed = true;
+  hideShowFilterBtnClass = 'btn-outline-success';
+  hideShowFiltersText = 'Show';
 
   selectedLocale: string;
   selectedCategory: string;
@@ -80,6 +84,17 @@ export class CookbookViewComponent implements OnInit {
   receiveVisibility(visibliityPair: [string, boolean]) {
     this.visibilityMatrix.set(visibliityPair[0], visibliityPair[1]);
     this.anyVisible = Array.from(this.visibilityMatrix.values()).some(visible => visible === true);
+  }
+
+  toggleFilters() {
+    this.isSearchCollapsed = !this.isSearchCollapsed;
+    if (this.isSearchCollapsed) {
+      this.hideShowFilterBtnClass = 'btn-outline-success';
+      this.hideShowFiltersText = 'Show';
+    } else {
+      this.hideShowFilterBtnClass = 'btn-outline-danger';
+      this.hideShowFiltersText = 'Hide';
+    }
   }
 
   clearFilters() {

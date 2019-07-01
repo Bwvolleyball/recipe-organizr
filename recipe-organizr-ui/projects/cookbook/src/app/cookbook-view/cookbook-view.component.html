@@ -1,9 +1,10 @@
 <div class="row mt-3 mb-1" [hidden]="localeSet?.size === 0 && categorySet?.size === 0 && tagsSet?.size === 0">
   <div class="card w-100">
     <div class="card-header card-text text-center">
+      <button class="btn float-left" [ngClass]="hideShowFilterBtnClass" (click)="toggleFilters()">{{hideShowFiltersText}}</button>
       <span class="h3 text-info">Filters</span>
     </div>
-    <div class="card-body">
+    <div class="card-body" [collapse]="isSearchCollapsed" [isAnimated]="true">
       <div class="mt-1 mb-1" [hidden]="localeSet?.size === 0">
         <span class="input-group-text row">Locale</span>
         <div class="btn-group flex-wrap" btnRadioGroup [(ngModel)]="selectedLocale">
