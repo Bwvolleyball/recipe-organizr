@@ -41,6 +41,21 @@
     </cookbook-recipe-tile>
   </div>
 </div>
+<div [hidden]="anyVisible">
+  <div class="mt-3 offset-4 col-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <span class="card-text card-body card-title h3">No Recipes!</span>
+      </div>
+      <div class="card-body card-text">
+        <p class="">
+          Oh no! You seem to have filtered out all available recipes!
+          Would you like to <span class="btn-link clickable" (click)="clearFilters()">clear the filters</span> and try again?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <div *ngIf="cookbook && cookbook?.recipes.length == 0">
   <div class="mt-3 offset-4 col-4">
     <div class="card">

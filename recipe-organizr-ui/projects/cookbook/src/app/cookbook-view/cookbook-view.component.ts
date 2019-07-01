@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
@@ -79,7 +79,14 @@ export class CookbookViewComponent implements OnInit {
 
   receiveVisibility(visibliityPair: [string, boolean]) {
     this.visibilityMatrix.set(visibliityPair[0], visibliityPair[1]);
-    this.anyVisible = Array.from(this.visibilityMatrix.values()).some( visible => visible === true);
+    this.anyVisible = Array.from(this.visibilityMatrix.values()).some(visible => visible === true);
+  }
+
+  clearFilters() {
+    this.selectedLocale = undefined;
+    this.selectedCategory = undefined;
+    this.selectedTags = {};
+    this.captureTags();
   }
 
   deleteRecipe(recipeId: string) {
