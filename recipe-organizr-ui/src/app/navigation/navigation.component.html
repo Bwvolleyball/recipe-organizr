@@ -13,7 +13,7 @@
       <a class="nav-link text-light" routerLink="/" href="#" (click)="logout()"><span class="text-light">| </span>Log Out</a>
     </li>
     <li class="nav-item" [hidden]="isAuthenticated">
-      <a class="nav-link text-light text-nowrap" href="#" routerLink="/auth/secure">Log In | Register</a>
+      <a class="nav-link text-light text-nowrap" href="#" (click)="login()" routerLink="/auth/secure">Log In | Register</a>
     </li>
   </ul>
 </nav>

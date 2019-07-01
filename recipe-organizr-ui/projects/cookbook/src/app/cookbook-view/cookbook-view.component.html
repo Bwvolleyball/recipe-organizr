@@ -1,24 +1,26 @@
-<div class="row mt-3 mb-1">
+<div class="row mt-3 mb-1" [hidden]="localeSet?.size === 0 && categorySet?.size === 0 && tagsSet?.size === 0">
   <div class="card w-100">
     <div class="card-header card-text text-center">
+      <button class="btn float-left" [ngClass]="hideShowFilterBtnClass" (click)="toggleFilters()">{{hideShowFiltersText}}</button>
       <span class="h3 text-info">Filters</span>
+      <button class="btn btn-outline-danger float-right" [hidden]="!empty(selectedLocale, selectedCategory, selectedTagsString)" (click)="clearFilters()">Reset</button>
     </div>
-    <div class="card-body">
-      <div class="mt-1 mb-1">
+    <div class="card-body" [collapse]="isSearchCollapsed" [isAnimated]="true">
+      <div class="mt-1 mb-1" [hidden]="localeSet?.size === 0">
         <span class="input-group-text row">Locale</span>
         <div class="btn-group flex-wrap" btnRadioGroup [(ngModel)]="selectedLocale">
           <button *ngFor="let locale of asArray(localeSet.values()).sort()"
                   class="tight-btn btn btn-outline-primary mx-1 my-1" uncheckable [btnRadio]="locale">{{locale}}</button>
         </div>
       </div>
-      <div class="mt-1 mb-1">
+      <div class="mt-1 mb-1" [hidden]="categorySet?.size === 0">
         <span class="input-group-text row">Category</span>
         <div class="btn-group flex-wrap" btnRadioGroup [(ngModel)]="selectedCategory">
           <button *ngFor="let category of asArray(categorySet.values()).sort()"
                   class="tight-btn btn btn-outline-dark mx-1 my-1" uncheckable [btnRadio]="category">{{category}}</button>
         </div>
       </div>
-      <div class="mt-1 mb-1">
+      <div class="mt-1 mb-1" [hidden]="tagsSet?.size === 0">
         <span class="input-group-text row">Tags</span>
         <div class="btn-group flex-wrap" btnRadioGroup>
           <button *ngFor="let tag of asArray(tagsSet.values()).sort()" class="tight-btn btn btn-outline-info mx-1 my-1"
@@ -39,6 +41,21 @@
       (visibleEmitter)="receiveVisibility($event)"
       (deleteEmitter)="deleteRecipe($event)">
     </cookbook-recipe-tile>
+  </div>
+</div>
+<div [hidden]="anyVisible">
+  <div class="mt-3 offset-4 col-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <span class="card-text card-body card-title h3">No Recipes!</span>
+      </div>
+      <div class="card-body card-text">
+        <p class="">
+          Oh no! You seem to have filtered out all available recipes!
+          Would you like to <span class="btn-link clickable" (click)="clearFilters()">clear the filters</span> and try again?
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 <div *ngIf="cookbook && cookbook?.recipes.length == 0">

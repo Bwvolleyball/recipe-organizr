@@ -4,6 +4,7 @@ import {UserClaims} from '@okta/okta-angular';
 import {Router} from '@angular/router';
 import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
 import {LoginService} from '../../../projects/auth/src/app/login/login.service';
+import {PreLoginService} from '../../../projects/auth/src/app/pre-login/pre-login.service';
 
 @Component({
   selector: 'app-navigation',
@@ -19,7 +20,10 @@ export class NavigationComponent implements OnInit {
 
   isAuthenticated: boolean;
 
-  constructor(private userService: UserService, private loginService: LoginService, private router: Router) {
+  constructor(private userService: UserService,
+              private preLoginService: PreLoginService,
+              private loginService: LoginService,
+              private router: Router) {
     this.loginService.authenticationState().subscribe((isAuthenticated: boolean) => this.authenticatedStateChanged(isAuthenticated));
   }
 
@@ -29,7 +33,7 @@ export class NavigationComponent implements OnInit {
   }
 
   login() {
-    this.loginService.loginAttempt();
+    this.preLoginService.preLoginStateCapture(this.router.url);
   }
 
   logout() {

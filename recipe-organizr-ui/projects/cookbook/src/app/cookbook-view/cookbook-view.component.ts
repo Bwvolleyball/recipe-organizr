@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
 import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
+import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
 
 class NamedRecipe {
   recipeId = '';
@@ -29,6 +30,10 @@ export class CookbookViewComponent implements OnInit {
   categorySet = new Set<string>();
   tagsSet = new Set<string>();
 
+  isSearchCollapsed = true;
+  hideShowFilterBtnClass = 'btn-outline-success';
+  hideShowFiltersText = 'Show';
+
   selectedLocale: string;
   selectedCategory: string;
   selectedTags: LooseObject = {};
@@ -37,7 +42,7 @@ export class CookbookViewComponent implements OnInit {
   visibilityMatrix = new Map<string, boolean>();
   anyVisible = true;
 
-  constructor(private cookbookService: CookbookService) {
+  constructor(private cookbookService: CookbookService, private recipeService: RecipeService) {
   }
 
   ngOnInit() {
@@ -78,7 +83,29 @@ export class CookbookViewComponent implements OnInit {
 
   receiveVisibility(visibliityPair: [string, boolean]) {
     this.visibilityMatrix.set(visibliityPair[0], visibliityPair[1]);
-    this.anyVisible = Array.from(this.visibilityMatrix.values()).some( visible => visible === true);
+    this.anyVisible = Array.from(this.visibilityMatrix.values()).some(visible => visible === true);
+  }
+
+  toggleFilters() {
+    this.isSearchCollapsed = !this.isSearchCollapsed;
+    if (this.isSearchCollapsed) {
+      this.hideShowFilterBtnClass = 'btn-outline-success';
+      this.hideShowFiltersText = 'Show';
+    } else {
+      this.hideShowFilterBtnClass = 'btn-outline-danger';
+      this.hideShowFiltersText = 'Hide';
+    }
+  }
+
+  empty(...strings: string[]): boolean {
+    return strings.some(value => value && value.length > 0);
+  }
+
+  clearFilters() {
+    this.selectedLocale = undefined;
+    this.selectedCategory = undefined;
+    this.selectedTags = {};
+    this.captureTags();
   }
 
   deleteRecipe(recipeId: string) {
@@ -90,6 +117,7 @@ export class CookbookViewComponent implements OnInit {
     };
     this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
     this.sortRecipes();
+    this.rebuildClickableFilters();
   }
 
   private sortRecipes() {
@@ -105,5 +133,14 @@ export class CookbookViewComponent implements OnInit {
       this.tagsSet.add(value);
       this.selectedTags[value] = false;
     });
+  }
+
+  private rebuildClickableFilters() {
+    this.localeSet = new Set<string>();
+    this.categorySet = new Set<string>();
+    this.tagsSet = new Set<string>();
+    Array.from(this.mappedRecipes.keys())
+      .map(recipeId => this.recipeService.findById(recipeId))
+      .map(rObservable => rObservable.subscribe(recipe => this.buildClickableFilters(recipe)));
   }
 }
