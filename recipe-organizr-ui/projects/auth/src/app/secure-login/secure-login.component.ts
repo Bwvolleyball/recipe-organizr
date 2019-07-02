@@ -3,7 +3,7 @@ import * as OktaSignIn from '@okta/okta-signin-widget';
 import {OktaAuthService} from '@okta/okta-angular';
 import {NavigationStart, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
-import {ATTEMPTED_URL} from '../auth/auth.guard.service';
+import {ATTEMPTED_URL} from '../pre-login/pre-login.service';
 
 @Component({
   selector: 'auth-secure-login',

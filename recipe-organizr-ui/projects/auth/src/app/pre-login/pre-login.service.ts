@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ATTEMPTED_URL} from '../auth/auth.guard.service';
 import {CookieService} from 'ngx-cookie-service';
+
+export const ATTEMPTED_URL = 'recipe-organizr-nav-prevented';
 
 @Injectable({
   providedIn: 'root'

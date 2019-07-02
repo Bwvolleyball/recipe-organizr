@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {OktaAuthService} from '@okta/okta-angular';
-import {CookieService} from 'ngx-cookie-service';
 import {PreLoginService} from '../pre-login/pre-login.service';
-
-export const ATTEMPTED_URL = 'recipe-organizr-nav-prevented';
 
 @Injectable({
   providedIn: 'root'
