@@ -31,6 +31,7 @@ configurations {
 
 val kotlinLogginVersion = "1.6.24"
 val flywayVersion = "5.2.4"
+val swaggerVersion = "2.9.2"
 
 repositories {
 	mavenCentral()
@@ -48,6 +49,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("io.springfox:springfox-swagger2:$swaggerVersion")
+	implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
 	implementation("io.github.microutils:kotlin-logging:$kotlinLogginVersion")
 	implementation("org.flywaydb:flyway-core:$flywayVersion")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
