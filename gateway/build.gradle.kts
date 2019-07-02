@@ -2,9 +2,10 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id ("org.springframework.boot") version "2.1.5.RELEASE"
-	id ("org.jetbrains.kotlin.jvm") version "1.3.31"
-	id ("org.jetbrains.kotlin.plugin.spring") version "1.3.31"
+	id("org.springframework.boot") version "2.1.6.RELEASE"
+	id("io.spring.dependency-management") version "1.0.8.RELEASE"
+	kotlin("jvm") version "1.3.40"
+	kotlin("plugin.spring") version "1.3.40"
 	id ("com.gradle.build-scan") version "2.3"
 }
 
