@@ -6,9 +6,7 @@ import io.bwvolleyball.auth.domain.User
 import io.bwvolleyball.auth.repository.UserRepository
 import io.bwvolleyball.auth.service.JwtService
 import mu.KotlinLogging
-import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.HttpClientErrorException
 
 @RestController
 @RequestMapping("/api/auth")

@@ -21,6 +21,8 @@ buildScan {
 group = "io.bwvolleyball"
 version = "0.0.1-SNAPSHOT"
 
+val swaggerVersion = "2.9.2"
+
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 }

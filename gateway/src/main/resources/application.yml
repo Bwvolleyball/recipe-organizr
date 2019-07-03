@@ -1,7 +1,15 @@
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/v2/api-docs]':
+            allowed-origins:
+              - "http://swagger.127.0.0.1.xip.io:8080"
+            allowed-methods:
+              - GET
       routes:
+        # Core api routes
         - id: auth-api
           uri: http://${bwvolleyball.hosts.auth-api.domain}:${bwvolleyball.hosts.auth-api.port}
           predicates:
@@ -14,11 +22,38 @@ spring:
           uri: http://${bwvolleyball.hosts.cookbook-api.domain}:${bwvolleyball.hosts.cookbook-api.port}
           predicates:
             - Path=/api/cookbook/**
+        # Start swagger gateway routes
+        - id: swagger-api
+          uri: http://${bwvolleyball.hosts.swagger-api.domain}:${bwvolleyball.hosts.swagger-api.port}
+          predicates:
+            - Host=swagger.127.0.0.1.xip.io:8080
+        - id: auth-swagger-api
+          uri: http://${bwvolleyball.hosts.auth-api.domain}:${bwvolleyball.hosts.auth-api.port}
+          predicates:
+            - Host=auth.swagger.127.0.0.1.xip.io:8080
+        - id: recipe-swagger-api
+          uri: http://${bwvolleyball.hosts.recipe-api.domain}:${bwvolleyball.hosts.recipe-api.port}
+          predicates:
+            - Host=recipe.swagger.127.0.0.1.xip.io:8080
+        - id: cookbook-swagger-api
+          uri: http://${bwvolleyball.hosts.cookbook-api.domain}:${bwvolleyball.hosts.cookbook-api.port}
+          predicates:
+            - Host=cookbook.swagger.127.0.0.1.xip.io:8080
         # The default, catch-all route sends items to the Angular SPA.
         - id: spa
           uri: http://${bwvolleyball.hosts.spa.domain}:${bwvolleyball.hosts.spa.port}
           predicates:
             - After=1970-01-01T00:00:00.000-00:00[America/Denver]
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
 bwvolleyball:
   hosts:
     auth-api:
@@ -30,6 +65,9 @@ bwvolleyball:
     cookbook-api:
       domain: ${COOKBOOK_API_HOST:localhost}
       port: ${COOKBOOK_API_PORT:8383}
+    swagger-api:
+      domain: ${SWAGGER_API_HOST:localhost}
+      port: ${COOKBOOK_API_PORT:8484}
     spa:
       domain: ${SPA_HOST:localhost}
       port: ${SPA_PORT:4200}

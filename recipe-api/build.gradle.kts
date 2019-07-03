@@ -50,7 +50,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("io.springfox:springfox-swagger2:$swaggerVersion")
-	implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
 	implementation("io.github.microutils:kotlin-logging:$kotlinLogginVersion")
 	implementation("org.flywaydb:flyway-core:$flywayVersion")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
