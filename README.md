@@ -21,6 +21,11 @@ This is the architecture diagram for this project:
 
 ![Application Architecture](./docs/images/Recipe_Organizr_Architecture.png)
 
+## Swagger API Docs
+> This section requires running the app to be running.  See [Running Locally](#running-locally) for additional details.
+
+
+
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
 

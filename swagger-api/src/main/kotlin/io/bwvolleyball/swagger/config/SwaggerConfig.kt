@@ -2,13 +2,31 @@ package io.bwvolleyball.swagger.config
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.web.server.ErrorPage
+import org.springframework.boot.web.server.WebServerFactoryCustomizer
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.swagger.web.SwaggerResource
 import springfox.documentation.swagger.web.SwaggerResourcesProvider
 
-class SwaggerConfig {
+@Configuration
+class SwaggerConfig(private val swaggerProperties: SwaggerProperties): WebMvcConfigurer {
+
+    override fun addViewControllers(registry: ViewControllerRegistry) {
+        registry.addViewController("/not-found").setViewName("redirect:${swaggerProperties.ownDomain}/swagger-ui.html")
+    }
+
+    @Bean
+    fun containerCustomizer(): WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>{
+        return WebServerFactoryCustomizer { it.addErrorPages(ErrorPage(HttpStatus.NOT_FOUND, "/not-found")) }
+    }
 
 }
 
@@ -49,4 +67,5 @@ class SwaggerAggregationController(private val swagger: SwaggerProperties): Swag
 class SwaggerProperties {
 
     lateinit var gatewayUrl: String
+    lateinit var ownDomain: String
 }

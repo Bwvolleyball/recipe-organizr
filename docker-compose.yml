@@ -39,6 +39,7 @@ services:
       AUTH_API_HOST: host.docker.internal
       RECIPE_API_HOST: host.docker.internal
       COOKBOOK_API_HOST: host.docker.internal
+      SWAGGER_API_HOST: host.docker.internal
       SPA_HOST: host.docker.internal
   auth-api:
     image: bwvolleyball/auth-api
@@ -73,5 +74,15 @@ services:
       localnet:
         aliases:
           - cookbook.local
+  swagger-api:
+    image: bwvolleyball/swagger-api
+    ports:
+      - '8484:8484'
+    environment:
+      SERVER_PORT: 8484
+    networks:
+      localnet:
+          aliases:
+            - swagger.local
 networks:
   localnet:
