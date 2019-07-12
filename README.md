@@ -24,7 +24,12 @@ This is the architecture diagram for this project:
 ## Swagger API Docs
 > This section requires running the app to be running.  See [Running Locally](#running-locally) for additional details.
 
+With the full application stack running locally, you are able to visit http://swagger.127.0.0.1.xip.io:8080
+to view API documentation for the various APIs.
 
+Select a spec (AKA, toggle between the different API applications) in the top right of the page, and then
+open up either a controller to see the various API calls that are available, or the models to see the objects
+that are sent back and forth between the APIs and the UI.
 
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
