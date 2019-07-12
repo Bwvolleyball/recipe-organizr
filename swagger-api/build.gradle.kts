@@ -31,6 +31,8 @@ configurations {
 
 val kotlinLogginVersion = "1.6.24"
 val flywayVersion = "5.2.4"
+val jjwtVersion = "0.10.5"
+val bouncyCastleVersion = "1.60"
 val swaggerVersion = "2.9.2"
 
 repositories {
@@ -43,19 +45,16 @@ ext {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("io.springfox:springfox-swagger2:$swaggerVersion")
+	implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
 	implementation("io.github.microutils:kotlin-logging:$kotlinLogginVersion")
-	implementation("org.flywaydb:flyway-core:$flywayVersion")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("com.h2database:h2")
 }
 
 configure<DependencyManagementExtension> {

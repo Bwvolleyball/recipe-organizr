@@ -1,0 +1,17 @@
+server:
+  port: 8484
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+bwvolleyball:
+  swagger:
+    #TODO: rename to base domain
+    gateway-url: .swagger.127.0.0.1.xip.io:8080
+    own-domain: http://swagger.127.0.0.1.xip.io:8080

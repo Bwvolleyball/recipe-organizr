@@ -21,6 +21,8 @@ buildScan {
 group = "io.bwvolleyball"
 version = "0.0.1-SNAPSHOT"
 
+val swaggerVersion = "2.9.2"
+
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 }
@@ -34,6 +36,7 @@ ext {
 }
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 	implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 //	implementation ("org.springframework.cloud:spring-cloud-starter-config")
