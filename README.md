@@ -40,6 +40,8 @@ Select a spec (AKA, toggle between the different API applications) in the top ri
 open up either a controller to see the various API calls that are available, or the models to see the objects
 that are sent back and forth between the APIs and the UI.
 
+A static reference to the models produced by this application can be found in the [Swagger Model document](./docs/SWAGGER_MODELS.md).
+
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
 
