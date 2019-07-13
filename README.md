@@ -6,6 +6,15 @@
 
 [![Build Status](https://travis-ci.org/Bwvolleyball/recipe-organizr.svg?branch=master)](https://travis-ci.org/Bwvolleyball/recipe-organizr)
 
+## Additional Content
+> A large portion of the required documentation for this practicum lives in the [docs](./docs) folder.
+
+###### Important Class Documents
+* [Project Proposal](./docs/PROJECT_PROPOSAL.md)
+* [Annotated Bibliography](./docs/Annotated_Bibliography.pdf)
+* [Field Notebook](./docs/FIELD_NOTEBOOK.md)
+* [Server Install](./docs/SERVER_INSTALL.md)
+
 ## Application Architecture
 > For a more comprehensive documen about this application's archietecture, view the [Project Proposal](./docs/PROJECT_PROPOSAL.md).
 
