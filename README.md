@@ -12,6 +12,7 @@
 ###### Important Class Documents
 * [Project Proposal](./docs/PROJECT_PROPOSAL.md)
 * [Annotated Bibliography](./docs/Annotated_Bibliography.pdf)
+* [Experimental Annotated Bibliograpy in Markdown](./docs/ANNOTATED_BIBLIOGRAPHY.md)
 * [Field Notebook](./docs/FIELD_NOTEBOOK.md)
 * [Server Install](./docs/SERVER_INSTALL.md)
 
