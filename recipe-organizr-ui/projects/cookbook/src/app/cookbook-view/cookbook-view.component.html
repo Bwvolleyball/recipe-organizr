@@ -35,6 +35,7 @@
        class="col-4 mt-3 mb-1 btn btn-outline-primary">
     <cookbook-recipe-tile
       [routerLink]="'/recipe/detail/' + recipe.recipeId"
+      [recipeType]="recipe.recipeType"
       [recipeId]="recipe.recipeId"
       [filters]="[selectedLocale, selectedCategory, selectedTagsString]"
       (recipeEmitter)="recipeEventReceiver(recipe.recipeId, $event)"

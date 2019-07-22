@@ -2,11 +2,11 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("plugin.jpa") version "1.3.40"
+	kotlin("plugin.jpa") version "1.3.41"
 	id("org.springframework.boot") version "2.1.6.RELEASE"
 	id("io.spring.dependency-management") version "1.0.8.RELEASE"
-	kotlin("jvm") version "1.3.40"
-	kotlin("plugin.spring") version "1.3.40"
+	kotlin("jvm") version "1.3.41"
+	kotlin("plugin.spring") version "1.3.41"
 	id ("com.gradle.build-scan") version "2.3"
 }
 
@@ -42,6 +42,7 @@ ext {
 }
 
 dependencies {
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-RC")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")

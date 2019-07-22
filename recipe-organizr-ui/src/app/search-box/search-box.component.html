@@ -13,7 +13,7 @@
           (mouseout)="activated[i]=false"
           (click)="selectRecipe(result)"
         *ngFor="let result of searchResults; let i = index;">
-        {{result}}
+        {{result[0]}}
       </li>
     </ul>
   </div>

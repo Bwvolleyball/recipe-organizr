@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
-import {Cookbook} from '../cookbook/cookbook';
-import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
+import {Cookbook, CookbookEntry} from '../cookbook/cookbook';
+import {Recipe, RecipeType} from '../../../../recipe/src/app/recipe/recipe';
 import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
 
 class NamedRecipe {
+  recipeType: RecipeType;
   recipeId = '';
   recipeName = '';
 
@@ -53,8 +54,9 @@ export class CookbookViewComponent implements OnInit {
     this.cookbook = cookbook;
     for (const recipe of cookbook.recipes) {
       const namedRecipe = new NamedRecipe();
-      namedRecipe.recipeId = recipe;
-      this.mappedRecipes.set(recipe, namedRecipe);
+      namedRecipe.recipeType = recipe.recipeType;
+      namedRecipe.recipeId = recipe.recipeId;
+      this.mappedRecipes.set(recipe.recipeId, namedRecipe);
     }
     this.sortRecipes();
   }
@@ -111,9 +113,14 @@ export class CookbookViewComponent implements OnInit {
   deleteRecipe(recipeId: string) {
     this.mappedRecipes.delete(recipeId);
 
+    const recipes: CookbookEntry[] =
+      Array.from(this.mappedRecipes.values())
+        .map(namedRecipe => ({recipeId: namedRecipe.recipeId, recipeType: namedRecipe.recipeType}));
+
     const updatedCookbook: Cookbook = {
       userId: this.cookbook.userId,
-      recipes: Array.from(this.mappedRecipes.values()).map(recipe => recipe.recipeId)
+      // tslint:disable-next-line:max-line-length
+      recipes
     };
     this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
     this.sortRecipes();
@@ -127,8 +134,12 @@ export class CookbookViewComponent implements OnInit {
   }
 
   private buildClickableFilters(recipe: Recipe) {
-    this.localeSet.add(recipe.locale);
-    this.categorySet.add(recipe.category);
+    if (recipe.locale) {
+      this.localeSet.add(recipe.locale);
+    }
+    if (recipe.category) {
+      this.categorySet.add(recipe.category);
+    }
     recipe.tags.map(value => {
       this.tagsSet.add(value);
       this.selectedTags[value] = false;
@@ -139,8 +150,8 @@ export class CookbookViewComponent implements OnInit {
     this.localeSet = new Set<string>();
     this.categorySet = new Set<string>();
     this.tagsSet = new Set<string>();
-    Array.from(this.mappedRecipes.keys())
-      .map(recipeId => this.recipeService.findById(recipeId))
+    Array.from(this.mappedRecipes.values())
+      .map(namedRecipe => this.recipeService.findById(namedRecipe.recipeType, namedRecipe.recipeId))
       .map(rObservable => rObservable.subscribe(recipe => this.buildClickableFilters(recipe)));
   }
 }

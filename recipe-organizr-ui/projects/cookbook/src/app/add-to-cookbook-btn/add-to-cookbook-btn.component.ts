@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CookbookService} from '../cookbook/cookbook.service';
 import {Cookbook} from '../cookbook/cookbook';
+import {RecipeType} from '../../../../recipe/src/app/recipe/recipe';
 
 @Component({
   selector: 'cookbook-add-to-cookbook-btn',
@@ -9,6 +10,7 @@ import {Cookbook} from '../cookbook/cookbook';
 })
 export class AddToCookbookBtnComponent implements OnInit {
 
+  @Input() recipeType: RecipeType;
   @Input() recipeId: string;
 
   @Output() enabled = new EventEmitter<boolean>();
@@ -28,14 +30,14 @@ export class AddToCookbookBtnComponent implements OnInit {
 
   addToCookbook() {
     if (this.isEnabled) {
-      this.cookbook.recipes.push(this.recipeId);
+      this.cookbook.recipes.push(({recipeId: this.recipeId, recipeType: this.recipeType}));
       this.cookbookService.saveCookbook(this.cookbook).subscribe(cookbook => this.receiveCookbook(cookbook));
     }
   }
 
   private receiveCookbook(cookbook: Cookbook) {
     this.cookbook = cookbook;
-    const recipes = cookbook.recipes;
+    const recipes = cookbook.recipes.map(typedRecipe => typedRecipe.recipeId);
     if (recipes.includes(this.recipeId)) {
       this.btnText = 'Already in Cookbook ✓';
       this.tooltipText = 'This recipe has already been added to your cookbook!';

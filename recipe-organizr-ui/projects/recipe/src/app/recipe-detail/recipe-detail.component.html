@@ -36,13 +36,13 @@
         </div>
       </div>
     </div>
-    <div class="card-footer card-body" *ngIf="recipe?.source?.length > 0 || recipe?.video?.length > 0">
+    <div class="card-footer card-body" *ngIf="recipe?.source?.length > 0 || recipe?.video?.length > 0 || authenticated">
       <span class="row card-text ml-3 h4">Additional Actions</span>
       <a class="btn btn-outline-success ml-4 col-3" [href]="recipe?.source" *ngIf="recipe?.source?.length > 0"
          tooltip="View this recipe from the original source.">Original Recipe</a>
       <a class="btn btn-outline-danger ml-2 col-3" [href]="recipe?.video" *ngIf="recipe?.video?.length > 0"
          tooltip="Watch a video walking you through this recipe.">Video</a>
-      <cookbook-add-to-cookbook-btn class="btn btn-outline-info ml-2 col-3" [hidden]="!authenticated" (enabled)="addEnabled = $event" [class.disabled]="!addEnabled" [recipeId]="recipe?.id?.toString()"></cookbook-add-to-cookbook-btn>
+      <cookbook-add-to-cookbook-btn class="btn btn-outline-info ml-2 col-3" [hidden]="!authenticated" (enabled)="addEnabled = $event" [class.disabled]="!addEnabled" [recipeType]="recipe?.recipeType" [recipeId]="recipe?.id?.toString()"></cookbook-add-to-cookbook-btn>
     </div>
   </div>
 </div>

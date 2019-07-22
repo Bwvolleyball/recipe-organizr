@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Recipe} from '../../../../recipe/src/app/recipe/recipe';
+import {Recipe, RecipeType} from '../../../../recipe/src/app/recipe/recipe';
 import {RecipeService} from '../../../../recipe/src/app/recipe/recipe.service';
 import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 
@@ -12,6 +12,7 @@ export class RecipeTileComponent implements OnInit {
 
   isVisible = true;
 
+  @Input() recipeType: RecipeType;
   @Input() recipeId: string;
 
   // locale, category, tags
@@ -42,7 +43,7 @@ export class RecipeTileComponent implements OnInit {
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.recipeService.findById(this.recipeId).subscribe(recipe => this.receiveRecipe(recipe));
+    this.recipeService.findById(this.recipeType, this.recipeId).subscribe(recipe => this.receiveRecipe(recipe));
   }
 
   deleteMe(event) {
