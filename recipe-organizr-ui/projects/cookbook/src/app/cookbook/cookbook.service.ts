@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Cookbook} from './cookbook';
 import {LoginService} from '../../../../auth/src/app/login/login.service';
@@ -6,12 +6,18 @@ import {Observable} from 'rxjs';
 
 const COOKBOOK_API = '/api/cookbook/';
 
+class InternalRecipe {
+  recipeId: string;
+  recipeType: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CookbookService {
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient, private loginService: LoginService) {
+  }
 
   public getCookbook(): Observable<Cookbook> {
     const user = this.loginService.user();

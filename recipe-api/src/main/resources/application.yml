@@ -44,3 +44,6 @@ bwvolleyball:
   mealdb:
     api-key: 8673533
     version: v2
+  cocktaildb:
+    api-key: ${bwvolleyball.mealdb.api-key}
+    version: ${bwvolleyball.mealdb.version}

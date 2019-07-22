@@ -17,6 +17,10 @@ data class MealDbResponse(val meals: List<MealDbMeal>?) {
     fun names(): List<String> {
         return meals?.map{it.name()} ?: emptyList()
     }
+
+    fun typedNames(): List<Pair<String, RecipeType>> {
+        return meals?.map { it.name() to RecipeType.MEAL } ?: emptyList()
+    }
 }
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -81,7 +85,8 @@ data class MealDbMeal(val idMeal: String,
                 tags = parseTags(),
                 video = strYoutube,
                 source = strSource,
-                ingredients = parseIngredients())
+                ingredients = parseIngredients(),
+                recipeType = RecipeType.MEAL)
     }
 
     fun name(): String {

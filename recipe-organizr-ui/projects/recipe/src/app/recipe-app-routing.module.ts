@@ -8,7 +8,8 @@ const routes: Routes = [
   {
     path: 'recipe',
     children: [
-      {path: 'detail/:id', component: RecipeDetailComponent},
+      {path: 'detail/:random', component: RecipeDetailComponent},
+      {path: 'detail/:type/:id', component: RecipeDetailComponent},
       {path: 'list/:search', component: RecipeListComponent}
     ]
   }

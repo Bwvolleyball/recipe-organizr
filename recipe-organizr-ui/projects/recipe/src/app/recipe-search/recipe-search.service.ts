@@ -1,7 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, concat, Observable, of, Subscription} from 'rxjs';
-import {Recipe} from '../recipe/recipe';
+import {Recipe, RecipeType, RecipeTypeHelper} from '../recipe/recipe';
+
+class Pair {
+  first: string;
+  second: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +16,12 @@ export class RecipeSearchService {
   private searchUrl = 'api/recipe/search?limit=%limit%&name=%name%';
 
   private predictionSubscription: Subscription = Subscription.EMPTY;
-  private predictionSubject = new BehaviorSubject<string[]>([]);
+  private predictionSubject = new BehaviorSubject<[string, RecipeType][]>([]);
 
   constructor(private http: HttpClient) {
   }
 
-  predictions(): Observable<string[]> {
+  predictions(): Observable<[string, RecipeType][]> {
     return this.predictionSubject.asObservable();
   }
 
@@ -24,10 +29,14 @@ export class RecipeSearchService {
     if (!this.predictionSubscription.closed) {
       this.predictionSubscription.unsubscribe();
     }
-    const url = this.predictionUrl.replace('%limit%', limit.toString()) .replace('%name%', name);
-    const next: Observable<string[]> = name.trim() === '' ? of([]) : this.http.get<string[]>(url);
+    const url = this.predictionUrl.replace('%limit%', limit.toString()).replace('%name%', name);
+    const next: Observable<Pair[]> = name.trim() === '' ? of([]) : this.http.get<Pair[]>(url);
 
-    this.predictionSubscription = next.subscribe(results => this.predictionSubject.next(results));
+    this.predictionSubscription = next
+      .subscribe(results =>
+        this.predictionSubject.next(
+          results.map(value =>
+            [value.first, RecipeTypeHelper.fromString(value.second)])));
   }
 
   search(name: string, limit: number = 1): Observable<Recipe[]> {

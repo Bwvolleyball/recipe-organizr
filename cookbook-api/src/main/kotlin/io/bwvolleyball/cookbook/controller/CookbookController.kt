@@ -1,6 +1,7 @@
 package io.bwvolleyball.cookbook.controller
 
 import io.bwvolleyball.cookbook.domain.Cookbook
+import io.bwvolleyball.cookbook.domain.TypedRecipe
 import io.bwvolleyball.cookbook.repository.CookbookRepository
 import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
@@ -25,7 +26,7 @@ class CookbookController(private val cookbookRepository: CookbookRepository) {
      * Save or update a user's cookbook, which typically is just changing the list of recipes contained within the cookbook.
      */
     @PostMapping(path = ["/{userId}"])
-    fun saveCookbook(@PathVariable("userId") userId: String, @RequestBody(required = true) recipes: List<String>): Cookbook {
+    fun saveCookbook(@PathVariable("userId") userId: String, @RequestBody(required = true) recipes: List<TypedRecipe>): Cookbook {
         logger.info("Saving the cookbook for {} with recipes {}", userId, recipes)
         return cookbookRepository.saveAndFlush(Cookbook(userId, recipes.toSet()))
     }

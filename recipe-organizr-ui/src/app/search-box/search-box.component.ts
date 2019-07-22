@@ -3,6 +3,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {RecipeSearchService} from '../../../projects/recipe/src/app/recipe-search/recipe-search.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {RecipeType} from '../../../projects/recipe/src/app/recipe/recipe';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
 
   faSearch = faSearch;
   searchName = '';
-  searchResults: string[] = [];
+  searchResults: [string, RecipeType][] = [];
   activated: boolean[] = [];
 
   predictionSubscription: Subscription;
@@ -24,7 +25,10 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.predictionSubscription = this.recipeSearchService.predictions().subscribe(results => this.searchResults = results);
+    this.predictionSubscription = this.recipeSearchService.predictions().subscribe(results => {
+      console.log(results);
+      this.searchResults = results;
+    });
   }
 
   ngOnDestroy(): void {
@@ -40,10 +44,11 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/recipe/list/' + this.searchName).then(() => this.resetSearchResults());
   }
 
-  selectRecipe(name: string) {
-    this.recipeSearchService.search(name)
-      .subscribe(recipe => this.router.navigateByUrl('/recipe/detail/' + recipe[0].id)
-        .then(this.resetSearchResults));
+  selectRecipe(selection: [string, RecipeType]) {
+    this.recipeSearchService.search(selection[0])
+      .subscribe(recipe =>
+        this.router.navigateByUrl('/recipe/detail/' + recipe[0].recipeType.toString().toLocaleLowerCase() + '/' + recipe[0].id));
+    this.resetSearchResults();
   }
 
   private resetSearchResults() {

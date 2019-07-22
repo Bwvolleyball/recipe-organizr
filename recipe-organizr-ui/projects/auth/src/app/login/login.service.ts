@@ -13,8 +13,6 @@ const RECIPE_ORGANIZR_COOKIE = 'recipe-organizr-just-desserts';
 })
 export class LoginService {
 
-
-
   constructor(private http: HttpClient, private cookieService: CookieService, private oktaAuth: OktaAuthService) { }
 
   public login(idToken: string, accessToken: string, authenticated: boolean) {
