@@ -119,7 +119,6 @@ export class CookbookViewComponent implements OnInit {
 
     const updatedCookbook: Cookbook = {
       userId: this.cookbook.userId,
-      // tslint:disable-next-line:max-line-length
       recipes
     };
     this.cookbookService.saveCookbook(updatedCookbook).subscribe(cookbook => this.cookbook = cookbook);
