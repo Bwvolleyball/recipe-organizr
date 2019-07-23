@@ -6,11 +6,6 @@ import {Observable} from 'rxjs';
 
 const COOKBOOK_API = '/api/cookbook/';
 
-class InternalRecipe {
-  recipeId: string;
-  recipeType: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
