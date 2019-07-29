@@ -31,18 +31,6 @@ This is the architecture diagram for this project:
 
 ![Application Architecture](./docs/images/Recipe_Organizr_Architecture.png)
 
-## Swagger API Docs
-> This section requires running the app to be running.  See [Running Locally](#running-locally) for additional details.
-
-With the full application stack running locally, you are able to visit http://swagger.127.0.0.1.xip.io:8080
-to view API documentation for the various APIs.
-
-Select a spec (AKA, toggle between the different API applications) in the top right of the page, and then
-open up either a controller to see the various API calls that are available, or the models to see the objects
-that are sent back and forth between the APIs and the UI.
-
-A static reference to the models produced by this application can be found in the [Swagger Model document](./docs/SWAGGER_MODELS.md).
-
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
 
@@ -125,3 +113,17 @@ docker-compse up pgadmin
 ```
 To log in, the user name is: `user@email.com` and the password is `password`.
 
+## Swagger API Docs
+> This section requires running the app to be running.  See [Running Locally](#running-locally) for additional details.
+Note, this is a supporting feature of the application, but is not the application itself! Swagger is an api documentation
+tool that provides for machine (and human) readable specifications of your application.  For more information, [see their
+official website](https://swagger.io/)!
+
+With the full application stack running locally, you are able to visit http://swagger.127.0.0.1.xip.io:8080
+to view API documentation for the various APIs.
+
+Select a spec (AKA, toggle between the different API applications) in the top right of the page, and then
+open up either a controller to see the various API calls that are available, or the models to see the objects
+that are sent back and forth between the APIs and the UI.
+
+A static reference to the models produced by this application can be found in the [Swagger Model document](./docs/SWAGGER_MODELS.md).
