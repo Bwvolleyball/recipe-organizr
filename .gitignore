@@ -31,3 +31,6 @@ HELP.md
 
 ### Temporary Word Docs ###
 ~$*.docx
+
+### pgadmin sessions ###
+/docker/pgadmin/sessions
