@@ -1,0 +1,64 @@
+version: '3'
+services:
+  recipe-organizr-ui:
+    image: bwvolleyball/recipe-organizr-ui
+    ports:
+      - '4200:80'
+    networks:
+      internal:
+        aliases:
+          - spa.local
+  gateway:
+    image: bwvolleyball/gateway
+    ports:
+      - '8080:8080'
+    environment:
+      SERVER_PORT: 8080
+      AUTH_API_HOST: host.docker.internal
+      RECIPE_API_HOST: host.docker.internal
+      COOKBOOK_API_HOST: host.docker.internal
+      SPA_HOST: host.docker.internal
+  auth-api:
+    image: bwvolleyball/auth-api
+    ports:
+      - '8181:8181'
+    environment:
+      SERVER_PORT: 8181
+      SPRING_PROFILES_ACTIVE: gcp
+      DATABASE_HOST: 35.247.110.8
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: %59Z$T!bBZT9#p
+    networks:
+      internal:
+        aliases:
+          - auth.local
+  recipe-api:
+    image: bwvolleyball/recipe-api
+    ports:
+      - '8282:8282'
+    environment:
+      SERVER_PORT: 8282
+      SPRING_PROFILES_ACTIVE: gcp
+      DATABASE_HOST: 35.247.110.8
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: %59Z$T!bBZT9#p
+    networks:
+      internal:
+        aliases:
+          - recipe.local
+  cookbook-api:
+    image: bwvolleyball/cookbook-api
+    ports:
+      - '8383:8383'
+    environment:
+      SERVER_PORT: 8383
+      SPRING_PROFILES_ACTIVE: gcp
+      DATABASE_HOST: 35.247.110.8
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: %59Z$T!bBZT9#p
+    networks:
+      internal:
+        aliases:
+          - cookbook.local
+networks:
+  internal:
