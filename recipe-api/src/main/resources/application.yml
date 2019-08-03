@@ -9,8 +9,8 @@ logging:
 spring:
   datasource:
     url: jdbc:postgresql://${bwvolleyball.database.host}:5432/recipes
-    username: postgres
-    password: postgres
+    username: ${bwvolleyball.database.username}
+    password: ${bwvolleyball.database.password}
     driver-class-name: org.postgresql.Driver
   jpa:
     generate-ddl: true
@@ -41,6 +41,8 @@ feign:
 bwvolleyball:
   database:
     host: ${DATABASE_HOST:localhost}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
   mealdb:
     api-key: 8673533
     version: v2
