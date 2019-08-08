@@ -108,6 +108,6 @@ jobs:
     - gcloud version
     - gcloud auth activate-service-account $GCLOUD_SVC_ACCOUNT --key-file=./service-account.json
     - gcloud compute scp ./gcp/deploy.sh $GCLOUD_USERNAME@$GCLOUD_INSTANCE:/tmp/deploy.sh
-      --ssh-key-file=./gcloud_rsa
+      --ssh-key-file=./gcloud_rsa --zone=us-west1-a
     - gcloud compute ssh $GCLOUD_USERNAME@$GCLOUD_INSTANCE --command="cd /tmp/; sudo
-      chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa
+      chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa --zone=us-west1-a
