@@ -1,96 +1,107 @@
 sudo: false
-
+env:
+  matrix:
+  - secure: ITOLCOi0EiHMkMDacURgPL1+ivgw9h3Hyld+pcIAWJMMdUM/Qq9f2mELS6zT1dXMjp7Dg9t8S14vo0fgtERR/KrQJLJ4nycTjDrSASfHGjmGpCdghD+95XtFB9+/Vj50TQI7BbucopWsTAtgk9rMcpmnzhjpWsOS2QorW5hrDHUKn1pySthy+juSSqp/xmRCQYoi2yzvbSieJ10MrkU2ivn//QN7jbWQ6izz9rcg79o24grHl4i8gY6zBV+D5+cIPYDDe6W+8OARUXUECVxeC4BmYl1qqufH+FX4S4FSwDensDyR8010/fDoWNBC+UBIB+5KH/FRFSQl8NLuRqDDN/gHiex4mr9L+DkKPhoyu1truTg/YGI/1IeQXEMp7pYs4kw0+OMeZXbDaOv91WbqdsRqE4A082GcQThWQjABhDihM2lm1jhk4qX9r4eS8Gki34QaQgyh9gos01DdS7kbV8eeQeCWFG+kUmB8Ly8rM6KmjtGlNzFLtA9MDqLaIA3IMQZL473iddZNqn3fncbMiiAXRbDPtakZfKu3C0QSlsFLABqTNIaNM6kFc7tpIAUFVoGzs0JNypch2EgkEKrbvj5ZqYK/agTEN/kBxmjtQHh69/uypyXMWw7+ZlDRJKLczxnVUGu2C8l72LnNlBczk/M39Q0urq3bdZ9DLf7kqQY=
+  - secure: rrF6EXDcf3JutkGdWgQ5Z32om/Eb5ntOS6a+7Z4jAQ0asWPqFryaCY/qyR6tSzRwY0GF5Y3+jBEjrO9omZsZdxtiSds9Zl3FEXYafqQyThwLfT0TWWvPAd5oLGmafq2W3iyXlS7zy8bNsz5QBLinwlAbnJf37nRYFetZ277FbNDGGCO94R8I817Nz8iD32OlpPGb93cqkb6wQP7kaQIr+FI78RHLGvM3m4TEFd4zBAb5/1FVnkkkA+ZUre0KZ2Nrr1GYyGq4DTf6NLCtNkQFIEvHURtHsC7k+jAsFMopRgVuj9Ml4BTmZMFv/kJY6jODN5BbhnWKxYkh2hes6k0cIwN15eZi/tkdovf+Td5HYiRlbdX4pufNcDCE/qNpze/J0OUO6FkcCQu5LQ+k/SXhaxa+OqxwP2khEuTWW/LOm8bVYX/fIsoSBCy3lLPMROeu2e8d8e266KN6ZEGZgu5l6IGfjOmJHvyZgSbIWTnYE18Y4wCkEg4Z58GIsLvo8U3ktXXq17wdjTZoOofy1C3upglYFlE2hypnXRbYe8oXVbiEWNZwJNVDEpHKe2tT1jIMiY5FUk0MAJgIJGnqbOq4yxIhjLR/QjmSAtjVJxkeqtGnWucAKki0lDKIGe/ehTkLHW4yohByccFJu0qzS8PKLl0VEwgeCigcvut2T1sw0qo=
 services:
-  - docker
-
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
+  -in gcloud_rsa.enc -out ./gcloud_rsa -d
 before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/google-cloud-sdk/
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/google-cloud-sdk/"
 stages:
-  - compile
-  - deploy
-
+- compile
+- deploy
 jobs:
   include:
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd gateway
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . && docker push bwvolleyball/gateway
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd auth-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . && docker push bwvolleyball/auth-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd recipe-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api . && docker push bwvolleyball/recipe-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd cookbook-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api . && docker push bwvolleyball/cookbook-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd swagger-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/swagger-api . && docker push bwvolleyball/swagger-api
-    - stage: compile
-      language: node_js
-      node_js: lts/*
-      before_script:
-        - npm install -g @angular/cli
-        - cd recipe-organizr-ui
-      script:
-        - npm ci
-        - ng lint recipe-organizr-ui
-        - ng build --prod --aot
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
-    - stage: deploy
-      script:
-        - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
-        - ls /home/travis/google-cloud-sdk
-        - source /home/travis/google-cloud-sdk/path.bash.inc
-        - gcloud version
-
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd gateway
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . &&
+      docker push bwvolleyball/gateway
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd auth-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . &&
+      docker push bwvolleyball/auth-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd recipe-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api .
+      && docker push bwvolleyball/recipe-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd cookbook-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api
+      . && docker push bwvolleyball/cookbook-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd swagger-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/swagger-api .
+      && docker push bwvolleyball/swagger-api
+  - stage: compile
+    language: node_js
+    node_js: lts/*
+    before_script:
+    - npm install -g @angular/cli
+    - cd recipe-organizr-ui
+    script:
+    - npm ci
+    - ng lint recipe-organizr-ui
+    - ng build --prod --aot
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui
+      . && docker push bwvolleyball/recipe-organizr-ui
+  - stage: deploy
+    script:
+    - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
+      bash; fi
+    - ls /home/travis/google-cloud-sdk
+    - source /home/travis/google-cloud-sdk/path.bash.inc
+    - gcloud version
+    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_USERNAME@$GCLOUD_INSTANCE:/tmp/deploy.sh --ssh-key-file=./gcloud_rsa
+    - gcloud compute ssh $GCLOUD_USERNAME@$GCLOUD_INSTANCE --command="cd /tmp/; sudo chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa
