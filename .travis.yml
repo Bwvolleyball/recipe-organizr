@@ -19,8 +19,8 @@ cache:
   - "$HOME/.gradle/wrapper/"
   - "$HOME/google-cloud-sdk/"
 stages:
-- compile
 - deploy
+- compile
 jobs:
   include:
   - stage: compile
@@ -98,7 +98,7 @@ jobs:
     - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui
       . && docker push bwvolleyball/recipe-organizr-ui
   - stage: deploy
-    if: branch = master AND type = push
+#    if: branch = master AND type = push
     script:
     - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
       export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
