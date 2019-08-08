@@ -108,8 +108,7 @@ jobs:
     - source /home/travis/google-cloud-sdk/path.bash.inc
     - gcloud version
     - gcloud auth activate-service-account $GCLOUD_SVC_ACCOUNT --key-file=./service-account.json
-    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE:/tmp/deploy.sh
-      --ssh-key-file=./gcloud_rsa --zone=us-west1-a
+    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE:/tmp/deploy.sh --zone=us-west1-a
     - gcloud compute ssh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE --command="cd /tmp/;
       sudo chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa
       --zone=us-west1-a
