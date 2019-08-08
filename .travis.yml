@@ -1,87 +1,115 @@
 sudo: false
-
+env:
+  global:
+  - secure: ITOLCOi0EiHMkMDacURgPL1+ivgw9h3Hyld+pcIAWJMMdUM/Qq9f2mELS6zT1dXMjp7Dg9t8S14vo0fgtERR/KrQJLJ4nycTjDrSASfHGjmGpCdghD+95XtFB9+/Vj50TQI7BbucopWsTAtgk9rMcpmnzhjpWsOS2QorW5hrDHUKn1pySthy+juSSqp/xmRCQYoi2yzvbSieJ10MrkU2ivn//QN7jbWQ6izz9rcg79o24grHl4i8gY6zBV+D5+cIPYDDe6W+8OARUXUECVxeC4BmYl1qqufH+FX4S4FSwDensDyR8010/fDoWNBC+UBIB+5KH/FRFSQl8NLuRqDDN/gHiex4mr9L+DkKPhoyu1truTg/YGI/1IeQXEMp7pYs4kw0+OMeZXbDaOv91WbqdsRqE4A082GcQThWQjABhDihM2lm1jhk4qX9r4eS8Gki34QaQgyh9gos01DdS7kbV8eeQeCWFG+kUmB8Ly8rM6KmjtGlNzFLtA9MDqLaIA3IMQZL473iddZNqn3fncbMiiAXRbDPtakZfKu3C0QSlsFLABqTNIaNM6kFc7tpIAUFVoGzs0JNypch2EgkEKrbvj5ZqYK/agTEN/kBxmjtQHh69/uypyXMWw7+ZlDRJKLczxnVUGu2C8l72LnNlBczk/M39Q0urq3bdZ9DLf7kqQY=
+  - secure: rrF6EXDcf3JutkGdWgQ5Z32om/Eb5ntOS6a+7Z4jAQ0asWPqFryaCY/qyR6tSzRwY0GF5Y3+jBEjrO9omZsZdxtiSds9Zl3FEXYafqQyThwLfT0TWWvPAd5oLGmafq2W3iyXlS7zy8bNsz5QBLinwlAbnJf37nRYFetZ277FbNDGGCO94R8I817Nz8iD32OlpPGb93cqkb6wQP7kaQIr+FI78RHLGvM3m4TEFd4zBAb5/1FVnkkkA+ZUre0KZ2Nrr1GYyGq4DTf6NLCtNkQFIEvHURtHsC7k+jAsFMopRgVuj9Ml4BTmZMFv/kJY6jODN5BbhnWKxYkh2hes6k0cIwN15eZi/tkdovf+Td5HYiRlbdX4pufNcDCE/qNpze/J0OUO6FkcCQu5LQ+k/SXhaxa+OqxwP2khEuTWW/LOm8bVYX/fIsoSBCy3lLPMROeu2e8d8e266KN6ZEGZgu5l6IGfjOmJHvyZgSbIWTnYE18Y4wCkEg4Z58GIsLvo8U3ktXXq17wdjTZoOofy1C3upglYFlE2hypnXRbYe8oXVbiEWNZwJNVDEpHKe2tT1jIMiY5FUk0MAJgIJGnqbOq4yxIhjLR/QjmSAtjVJxkeqtGnWucAKki0lDKIGe/ehTkLHW4yohByccFJu0qzS8PKLl0VEwgeCigcvut2T1sw0qo=
+  - secure: QDbkgV92irqgcUBwxDJBGcQvhklmNMQmNXtArwnScmL5Og72FseiwcaaDlAcxTHqr3fYL8sJrm1kyMidaj14gIEawsNbA6R/aFSLZ59FiVOITXs1WQjHGe9XzcC6sA0pAfURols/dGpLCwyd7aIYvVbZlMvBx067K/2x+y4IiVHU4hYBjm/ZtNfuJZ5mbuvW1WQKT32jIRZeSeW30T9sF0OF7Q2K/U560RyCNAcZsYc6FwlAJvIM6TQUP80UOrN1cqImY/kWS4icqHuN72HenuaQs9957+xqiuz9riPfejNJNfgxiSyaXe2896Le5NRP3Ru9tUUDl2SPF4OIWmQX6GFusftMzQBsvW45MEARhLkssAA8kqutnKuXcOnBS7LUHlaX3DH0qfvXhFWfMXD9PGXkQMhpGXP5rEhkiUo6k1fGLkxiIhOPl0u4eAwlO+YnHuJleUV6SItFs/K+G9Y+bkqsgDHcYT6k75X0sevfR1fZX0tlwgP+8M3kUYxMhTFEo49BNV29jbK8OUJUwdtpsUi7uFoBHMUdqw9DJkH3y97MGz8HTKZrdbeJD6YjOOucoC6WeF65jKPnRTinklt6KENc1J51ryNcmV0NG5kIjiCDeIHGRfKOuQTCoUeTOqKaEaMQ99PkbCNBrQn1uHvLRDn7s8ZpX1+REsHslfzhw0E=
+  - secure: y/Q7L3UmONXlEEal+KYkaZL2HmZ7D8mMlf043joWjLDfOiUb7xsEonGYMONIbi7ExhwBhsZhqoUcqwT0gl4gbbBi4ii3Wb1Qq6Os9+9bFrbbRllSw6DjEKAMzriWijRTO54wuKqoGlT5YC3qTnck/uqUr3Hq18zKRVRJyMGOnNGYKY77vknYcoanvsTQxhtxOT5B8D8maC0DqplRdmoPSI9OMQfxCiJeXgWytzQgqTN9nXXT8+FrPz7g0wmeQjDYY8VLdpXXQiTdw0X3XnAEtH0QpD+fqASjH8zZL8Y2+BIl0yT+l4JILFDWebtPv2Jqzv120q0N9p9lLNvjPOIr2DoBfu4wOlXn5+HyBC3r/tKyVqcMyUmO8mkMGTJo6dJ6fH2ZMT6X8IV/uElQB7sGOkGf4naQ4VLKPpuFSsf5U4SE8HGiPDHZwkhVk8VX8J/eJs4LN+1lWB/4+WgRXh9XP2g0LO1+pKxwaCCDfhZoKMGPIxxnqUzNdMdjNSLzSkBUdhAjkp0KQE/8Hd6ROJFeNFELQ8FNtklPxlrCgrHmqaHqd8h6LYvGvv6XMhqqGNXfsQbNZqLLRr76rQz5otwC6wrPcsO8a1eBeQXFqaHIrMOqExFFo4ptzutCH6W2RWoqzNaExWEMBBVVFmfK6IQdJw+6l0WDzGfJYUPetnFxP9M=
+  - secure: KMTmYq23rDeWQwS23B6y3m1nOmE/oZr6kGH95LPhq7rgUrLOz+ggCfGrA33uTP5gF/1C+e5VMmUVkQIDMPoMWj29CsIT2IMCX8uscH9cJB13xK1sfxk66qRzPakUzkLnhBIgp4kPVcfptW+q4eEW4Drbmc22nxdaUctQhOI9Kujp+D9QG851iKxs4Mj9oW7obMWnEKAxsBBLjXHZgmgbQBBQJXVB1kMUCUawEf9U5nIlCo2WbIYXpC844NLWi7C4a7pS0k6IO9cWkcrH59u/X06034AzVXxTHKA9souqEPMo+ha15Jt0kVVPwijYu3LvcTsoSQzcx8I+5k5o+UwciU06MWWbiRkShgGr23uenJJ/WgkNHLWd1bnVBNdaew8Pg/VzYdBYWT7USQjEeV9J5tzRTiqW5xRBccpQZ8aFyZg2+jeCqxKKkoEEBEEupRLEtKis9r+6hlNUSqItTp1Ra1ZnTVMFtZ4yoXBDH8W6MasmsE7/Sd32k1c3HjXlZ8p7mYnnxLsTWYieuMXqvaiM51H5yvVCMEoJy8cPBeYvF0Rn/YMCT/DT9PByxCrPnH9U7Y0CTojpa8TKAaDjjqsVbRWdXpKkxX7QXucGNEHVpVDMS7gw/Y9CM0JQRj0CJyke+dTOFCgdrkEwgIpSOL3Q08Hf3BIeqc77fSZQiZ7/PXM=
 services:
-  - docker
-
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
+  -in secrets.tar.enc -out ./secrets.tar -d
+- tar xvf secrets.tar
 before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/google-cloud-sdk/"
 stages:
-  - compile
-
+- compile
+- deploy
 jobs:
   include:
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd gateway
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . && docker push bwvolleyball/gateway
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd auth-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . && docker push bwvolleyball/auth-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd recipe-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api . && docker push bwvolleyball/recipe-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd cookbook-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api . && docker push bwvolleyball/cookbook-api
-    - stage: compile
-      language: java
-      jdk: openjdk8
-      install: true
-      before_script:
-        - cd swagger-api
-      script:
-        - ./gradlew build --scan -s
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/swagger-api . && docker push bwvolleyball/swagger-api
-    - stage: compile
-      language: node_js
-      node_js: lts/*
-      before_script:
-        - npm install -g @angular/cli
-        - cd recipe-organizr-ui
-      script:
-        - npm ci
-        - ng lint recipe-organizr-ui
-        - ng build --prod --aot
-      after_success:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd gateway
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . &&
+      docker push bwvolleyball/gateway
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd auth-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . &&
+      docker push bwvolleyball/auth-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd recipe-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api .
+      && docker push bwvolleyball/recipe-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd cookbook-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api
+      . && docker push bwvolleyball/cookbook-api
+  - stage: compile
+    language: java
+    jdk: openjdk8
+    install: true
+    before_script:
+    - cd swagger-api
+    script:
+    - "./gradlew build --scan -s"
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/swagger-api .
+      && docker push bwvolleyball/swagger-api
+  - stage: compile
+    language: node_js
+    node_js: lts/*
+    before_script:
+    - npm install -g @angular/cli
+    - cd recipe-organizr-ui
+    script:
+    - npm ci
+    - ng lint recipe-organizr-ui
+    - ng build --prod --aot
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui
+      . && docker push bwvolleyball/recipe-organizr-ui
+  - stage: deploy
+    if: branch = master AND type = push
+    script:
+    - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
+      bash; fi
+    - ls /home/travis/google-cloud-sdk
+    - source /home/travis/google-cloud-sdk/path.bash.inc
+    - gcloud version
+    - gcloud auth activate-service-account $GCLOUD_SVC_ACCOUNT --key-file=./service-account.json
+    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE:/tmp/deploy.sh
+      --zone=us-west1-a --project=$GCLOUD_PROJECT
+    - gcloud compute ssh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE --command="cd /tmp/;
+      sudo chmod 777 deploy.sh; sudo bash deploy.sh;" --zone=us-west1-a --project=$GCLOUD_PROJECT
