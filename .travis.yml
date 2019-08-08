@@ -8,6 +8,8 @@ services:
 before_install:
 - openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
   -in gcloud_rsa.enc -out ./gcloud_rsa -d
+- openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
+  -in gcloud_rsa.pub.enc -out ./gcloud_rsa.pub -d
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -103,5 +105,7 @@ jobs:
     - ls /home/travis/google-cloud-sdk
     - source /home/travis/google-cloud-sdk/path.bash.inc
     - gcloud version
-    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_USERNAME@$GCLOUD_INSTANCE:/tmp/deploy.sh --ssh-key-file=./gcloud_rsa
-    - gcloud compute ssh $GCLOUD_USERNAME@$GCLOUD_INSTANCE --command="cd /tmp/; sudo chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa
+    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_USERNAME@$GCLOUD_INSTANCE:/tmp/deploy.sh
+      --ssh-key-file=./gcloud_rsa
+    - gcloud compute ssh $GCLOUD_USERNAME@$GCLOUD_INSTANCE --command="cd /tmp/; sudo
+      chmod 777 deploy.sh; sudo bash deploy.sh;" --ssh-key-file=./gcloud_rsa
