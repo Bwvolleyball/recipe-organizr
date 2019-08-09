@@ -1,9 +1,11 @@
 sudo: false
 services:
 - docker
+env:
+  global:
+    secure: Gq/J5Z3f9+BNvFlh02oyvdaNxHm94Jzfu6GTqftxOVF2PFQkGHvg0AQ7wHLJNG0CFKvfCPWOnPCyUxUVnxVi5fs+NBTLDbliGFv30Lwmw9zzHRL+yQ44gpKD4WHbt+zFKvHdbLesNSzKwFKGz8OX34Hg6xg/uslxWiP0R+6LFuucbeVB0VVWze9izfk9N65++WogludJ2SGLwmnZ1Z0kAZO5nfxMGyIQdLnXEBu3OpGEE4CDNNDFlgecIDqCq7a53qoYnoPK+RurvMB48fox23P3aKn7ixQ29+RtXFAhYm8DBTCE3FjlCnGuPKgnVJo4eVATmbLe8XTim/AlIW63eyGydvCz7LmTgqNwfRV/6Q4rEcNgwYDOCt4PFPRAp6VqXsjkZ+jQhJDmDNKVpn4FakgX5O3kXEjNeicIQpi+18QsMoqCJYSSMwX/0+MdBV1GYKDWDormCBemLltNEZmhYtZorj+S/hWwxpyYEKQuoz+xAKR7JW8WyntH1wkrY/zZIBmSveHqmaKEjVkDQ3xfjpmZTKqPDb12lZRN/wklpNtzOOzU0BT8TsQLlVrqh2fUbgR6LVJ29frWCXnfazagRi6+oLNdpS1q5jB948k9T+nKp79sDZdEmqkimWg3jNWW1ULHIG35W0lra6y75v3pa96APv0XofLDMMiWCOEIF98=
 before_install:
-- openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
-  -in service-account.json.enc -out service-account.json -d
+- echo $GPG_PASSWORD | gpg --passphrase-fd 0 service-account.json.gpg
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
