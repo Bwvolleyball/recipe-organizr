@@ -34,3 +34,6 @@ HELP.md
 
 ### pgadmin sessions ###
 /docker/pgadmin/sessions
+
+### gcloud files ###
+service-account.json

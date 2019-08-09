@@ -2,8 +2,8 @@ sudo: false
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_aade788807b4_key -iv $encrypted_aade788807b4_iv
-  -in secrets.tar.enc -out ./secrets.tar -d
+- openssl aes-256-cbc -K $encrypted_a9b88be35457_key -iv $encrypted_a9b88be35457_iv
+  -in service-account.json.enc -out service-account.json -d
 - tar xvf secrets.tar
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -28,8 +28,8 @@ jobs:
     - "./gradlew build --scan -s"
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/gateway . &&
-      docker push bwvolleyball/gateway
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/gateway . && docker push bwvolleyball/gateway
   - stage: compile
     language: java
     jdk: openjdk8
@@ -40,8 +40,8 @@ jobs:
     - "./gradlew build --scan -s"
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/auth-api . &&
-      docker push bwvolleyball/auth-api
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/auth-api . && docker push bwvolleyball/auth-api
   - stage: compile
     language: java
     jdk: openjdk8
@@ -52,8 +52,8 @@ jobs:
     - "./gradlew build --scan -s"
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-api .
-      && docker push bwvolleyball/recipe-api
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/recipe-api . && docker push bwvolleyball/recipe-api
   - stage: compile
     language: java
     jdk: openjdk8
@@ -64,8 +64,8 @@ jobs:
     - "./gradlew build --scan -s"
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/cookbook-api
-      . && docker push bwvolleyball/cookbook-api
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/cookbook-api . && docker push bwvolleyball/cookbook-api
   - stage: compile
     language: java
     jdk: openjdk8
@@ -76,8 +76,8 @@ jobs:
     - "./gradlew build --scan -s"
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/swagger-api .
-      && docker push bwvolleyball/swagger-api
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/swagger-api . && docker push bwvolleyball/swagger-api
   - stage: compile
     language: node_js
     node_js: lts/*
@@ -90,8 +90,8 @@ jobs:
     - ng build --prod --aot
     after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && docker build -t bwvolleyball/recipe-organizr-ui
-      . && docker push bwvolleyball/recipe-organizr-ui
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
   - stage: deploy
     if: branch = master AND type = push
     script:
