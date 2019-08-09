@@ -130,4 +130,11 @@ A static reference to the models produced by this application can be found in th
 
 ## Deployment
 
-TODO: More to come!
+This project is deployed via travis-ci directly to the google cloud compute engine!
+
+It is deployed on each push (and successful build) of the `master` branch. See the below diagram for a break-down
+of the CI/CD flow for this project.
+
+This application will be hosted at http://recipe-organizr.me until this practicum has been completed.
+
+![CI/CD Workflow for Recipe Organizr](./docs/images/ci_cd_diagram.png)
