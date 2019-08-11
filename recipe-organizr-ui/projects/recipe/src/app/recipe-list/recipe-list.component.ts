@@ -34,9 +34,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesSubscription = this.recipeSearchService
       .search(this.searchTerm, 25)
       .subscribe(recipes => {
-        console.log(recipes);
         this.recipes = this.groupRecipes(recipes);
-        console.log(this.recipes);
         this.activated = this.copyToActivated(this.recipes);
       });
   }
