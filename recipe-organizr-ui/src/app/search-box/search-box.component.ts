@@ -26,7 +26,6 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.predictionSubscription = this.recipeSearchService.predictions().subscribe(results => {
-      console.log(results);
       this.searchResults = results;
     });
   }

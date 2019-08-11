@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
 
     this.userService.user().subscribe((user) => {
       this.user = user;
-      console.log(user);
     });
   }
 }
