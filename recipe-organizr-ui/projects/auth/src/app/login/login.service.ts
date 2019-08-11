@@ -34,7 +34,6 @@ export class LoginService {
   }
 
   private setLoginCookie(user: User) {
-    console.log('Got user: %o', user);
     // this cookie lasts for 4 hours.
     const expiration = new Date();
     expiration.setHours(expiration.getHours() + 4);
