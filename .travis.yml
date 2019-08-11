@@ -17,6 +17,20 @@ stages:
 jobs:
   include:
   - stage: compile
+    language: node_js
+    node_js: lts/*
+    before_script:
+    - npm install -g @angular/cli
+    - cd recipe-organizr-ui
+    script:
+    - npm ci
+    - ng lint recipe-organizr-ui
+    - ng build --prod --aot
+    after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
+      build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
+  - stage: compile
     language: java
     jdk: openjdk8
     install: true
@@ -76,20 +90,6 @@ jobs:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
       build -t bwvolleyball/swagger-api . && docker push bwvolleyball/swagger-api
-  - stage: compile
-    language: node_js
-    node_js: lts/*
-    before_script:
-    - npm install -g @angular/cli
-    - cd recipe-organizr-ui
-    script:
-    - npm ci
-    - ng lint recipe-organizr-ui
-    - ng build --prod --aot
-    after_success:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
-      build -t bwvolleyball/recipe-organizr-ui . && docker push bwvolleyball/recipe-organizr-ui
   - stage: deploy
     if: branch = master AND type = push
     script:
