@@ -34,6 +34,10 @@ This is the architecture diagram for this project:
 ## Running Locally
 > This project is a host of microservices.  Therefore, to run this locally, there are several projects that need to be run.
 
+**Important** The Gateway uses both HTTPS & HTTP, but to avoid a multitude of stack-traces when running this locally due 
+to an invalid / unknown certificate, please follow the instructions provided in 
+[this document specific to the gateway project](./gateway/TRUSTED_LOCAL_SSL.md).
+
 You have two options for running this project locally.
 1. Launch everything via Docker. (Ideal for running the app)
 2. Launch each service individually. (Idea for localhost development)

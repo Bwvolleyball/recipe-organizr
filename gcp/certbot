@@ -1,0 +1,7 @@
+#! /bin/bash
+
+# This is a reference of the certbot command I am running.
+
+docker run -p 80:80 --rm \
+    -v ssl:/etc/letsencrypt \
+    certbot/certbot:latest "$@"
