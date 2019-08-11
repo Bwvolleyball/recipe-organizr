@@ -11,13 +11,21 @@ services:
   gateway:
     image: bwvolleyball/gateway
     ports:
-      - '80:8080'
+      - '80:8079'
+      - '443:8080'
+    volumes:
+      - ssl:/etc/letsencrypt
     environment:
       SERVER_PORT: 8080
       AUTH_API_HOST: 35.233.144.68
       RECIPE_API_HOST: 35.233.144.68
       COOKBOOK_API_HOST: 35.233.144.68
       SPA_HOST: 35.233.144.68
+      PUBLIC_HTTPS_PORT: 443
+      SERVER_HTTPS_ONLY: true
+      GATEWAY_SSL_PATH: /etc/letsencrypt/live/recipe-organizr.me/keystore.p12
+      GATEWAY_SSL_PASSWORD: recipeSSL7
+      GATEWAY_SSL_ALIAS: recipe-organizr
   auth-api:
     image: bwvolleyball/auth-api
     ports:
@@ -62,3 +70,5 @@ services:
           - cookbook.local
 networks:
   internal:
+volumes:
+  ssl:

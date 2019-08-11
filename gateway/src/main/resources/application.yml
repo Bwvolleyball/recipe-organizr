@@ -63,7 +63,9 @@ management:
 
 bwvolleyball:
   server:
+    https-only: ${SERVER_HTTPS_ONLY:false}
     http-port: ${SERVER_HTTP_PORT:8079}
+    public-https-port: ${PUBLIC_HTTPS_PORT:${server.port:8080}}
   ssl:
     path: ${GATEWAY_SSL_PATH:classpath:keystore.p12}
     password: ${GATEWAY_SSL_PASSWORD:localdevelopment}

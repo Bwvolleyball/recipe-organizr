@@ -1,0 +1,8 @@
+#! /bin/bash
+
+# this is an example of the openssl command I am running, it was built with the following dockerfile:
+# https://github.com/alexisrolland/docker-openssl/blob/master/Dockerfile
+
+docker run -it --rm \
+    -v ssl:/etc/letsencrypt \
+    openssl "$@"
