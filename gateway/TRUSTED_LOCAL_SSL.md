@@ -42,3 +42,9 @@ After you've done the steps above, set the following environment variable for th
 Run the whole stack, and if it works, this will be your result (The lock is the goal):
 
 ![Trusted Local SSL](../docs/images/local_ssl_trusted.png)
+
+## Remote SSL
+> In addition to developing locally with SSL, this project is configured to use SSL (only) where it is deployed on GCP.
+
+For an explanation of how HTTPS / SSL was configured for the remote deployment, see 
+[this document detailing the configuration](../gcp/GCP_CONFIGURATION.md). 
