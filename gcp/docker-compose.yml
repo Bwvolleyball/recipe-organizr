@@ -22,7 +22,7 @@ services:
       COOKBOOK_API_HOST: 35.233.144.68
       SPA_HOST: 35.233.144.68
       PUBLIC_HTTPS_PORT: 443
-      SERVER_HTTPS_ONLY: true
+      SERVER_HTTPS_ONLY: 'true'
       GATEWAY_SSL_PATH: /etc/letsencrypt/live/recipe-organizr.me/keystore.p12
       GATEWAY_SSL_PASSWORD: recipeSSL7
       GATEWAY_SSL_ALIAS: recipe-organizr
@@ -72,3 +72,4 @@ networks:
   internal:
 volumes:
   ssl:
+    external: true
