@@ -1,6 +1,8 @@
 # recipe-organizr
 >A web-based cookbook application built as my practicum project for my masters in software engineering.
 
+The latest version is hosted at https://recipe-organizr.me.
+
 ## Build Status
 > This project uses Travis CI for CI/CD builds both on commit and when a pull request is opened.
 
