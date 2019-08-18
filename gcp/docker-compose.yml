@@ -4,6 +4,8 @@ services:
     image: bwvolleyball/recipe-organizr-ui
     ports:
       - '4200:80'
+    logging:
+      driver: gcplogs
     networks:
       internal:
         aliases:
@@ -26,6 +28,8 @@ services:
       GATEWAY_SSL_PATH: /etc/letsencrypt/live/recipe-organizr.me/keystore.p12
       GATEWAY_SSL_PASSWORD: recipeSSL7
       GATEWAY_SSL_ALIAS: recipe-organizr
+    logging:
+      driver: gcplogs
   auth-api:
     image: bwvolleyball/auth-api
     ports:
@@ -36,6 +40,8 @@ services:
       DATABASE_HOST: 35.247.110.8
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: '%59Z$$T!bBZT9#p'
+    logging:
+      driver: gcplogs
     networks:
       internal:
         aliases:
@@ -50,6 +56,8 @@ services:
       DATABASE_HOST: 35.247.110.8
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: '%59Z$$T!bBZT9#p'
+    logging:
+      driver: gcplogs
     networks:
       internal:
         aliases:
@@ -64,6 +72,8 @@ services:
       DATABASE_HOST: 35.247.110.8
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: '%59Z$$T!bBZT9#p'
+    logging:
+      driver: gcplogs
     networks:
       internal:
         aliases:
