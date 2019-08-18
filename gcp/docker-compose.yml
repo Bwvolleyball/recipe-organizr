@@ -19,6 +19,7 @@ services:
       - ssl:/etc/letsencrypt
     environment:
       SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: gcp
       AUTH_API_HOST: 35.233.144.68
       RECIPE_API_HOST: 35.233.144.68
       COOKBOOK_API_HOST: 35.233.144.68
