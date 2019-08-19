@@ -43,6 +43,13 @@ Run the whole stack, and if it works, this will be your result (The lock is the 
 
 ![Trusted Local SSL](../docs/images/local_ssl_trusted.png)
 
+## Running with Trusted SSL in Docker Compose
+
+At the root of this project, you must create a file called `gateway.env` and provide the 3 environment variables specified
+above in a key=value format.  This file is in the .gitignore, but the docker-compose will load variables from it.
+
+This requires mounting the path to your local ssl certificate into the container.  The default location for this is ~/.ssl/.
+
 ## Remote SSL
 > In addition to developing locally with SSL, this project is configured to use SSL (only) where it is deployed on GCP.
 

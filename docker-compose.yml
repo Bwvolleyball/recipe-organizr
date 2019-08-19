@@ -42,6 +42,8 @@ services:
       COOKBOOK_API_HOST: host.docker.internal
       SWAGGER_API_HOST: host.docker.internal
       SPA_HOST: host.docker.internal
+    volumes:
+      - ~/.ssl:/ssl
   auth-api:
     image: bwvolleyball/auth-api
     ports:

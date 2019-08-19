@@ -35,6 +35,10 @@ HELP.md
 ### pgadmin sessions ###
 /docker/pgadmin/sessions
 
+### Docker Compose overrides ###
+.env
+gateway.env
+
 ### gcloud files ###
 service-account.json
 secrets.txt
