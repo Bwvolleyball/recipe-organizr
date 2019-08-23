@@ -38,7 +38,7 @@ This is the architecture diagram for this project:
 
 **Important** The Gateway uses both HTTPS & HTTP, but to avoid a multitude of stack-traces when running this locally due 
 to an invalid / unknown certificate, please follow the instructions provided in 
-[this document specific to the gateway project](./gateway/TRUSTED_LOCAL_SSL.md).
+[this document specific to the gateway project](./docs/TRUSTED_LOCAL_SSL.md).
 
 You have two options for running this project locally.
 1. Launch everything via Docker. (Ideal for running the app)
@@ -144,3 +144,5 @@ of the CI/CD flow for this project.
 This application will be hosted at http://recipe-organizr.me until this practicum has been completed.
 
 ![CI/CD Workflow for Recipe Organizr](./docs/images/ci_cd_diagram.png)
+
+For additional details on this remote deployment, see [gcp configuration](./gcp/GCP_CONFIGURATION.md).

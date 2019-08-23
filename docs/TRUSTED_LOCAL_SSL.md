@@ -41,7 +41,7 @@ After you've done the steps above, set the following environment variable for th
 
 Run the whole stack, and if it works, this will be your result (The lock is the goal):
 
-![Trusted Local SSL](../docs/images/local_ssl_trusted.png)
+![Trusted Local SSL](images/local_ssl_trusted.png)
 
 ## Running with Trusted SSL in Docker Compose
 
