@@ -1,0 +1,50 @@
+{
+  "git": {
+    "build": {
+      "host": "Brandons-MacBook-Pro.local",
+      "version": "0.0.1-SNAPSHOT",
+      "time": "2019-08-24T03:18:29Z",
+      "user": {
+        "name": "Brandon Ward",
+        "email": "brandon.ward1993@gmail.com"
+      }
+    },
+    "branch": "add-git-info",
+    "commit": {
+      "message": {
+        "short": "Final polish (#39)",
+        "full": "Final polish (#39)\n\n* Polishing all docs and ensuring they are either linked from the primary README, or in the docs folder\r\n* Adding footer with link to my LinkedIn\r\n"
+      },
+      "id": {
+        "describe": "",
+        "abbrev": "adbedbe",
+        "full": "adbedbead8f5c6891cc71305bdcdf04033bba406"
+      },
+      "time": "2019-08-23T23:06:03Z",
+      "user": {
+        "email": "brandon.ward1993@gmail.com",
+        "name": "Brandon Ward"
+      }
+    },
+    "closest": {
+      "tag": {
+        "name": "",
+        "commit": {
+          "count": ""
+        }
+      }
+    },
+    "dirty": "true",
+    "remote": {
+      "origin": {
+        "url": "git@github.com:Bwvolleyball/recipe-organizr.git"
+      }
+    },
+    "tags": "",
+    "total": {
+      "commit": {
+        "count": "61"
+      }
+    }
+  }
+}

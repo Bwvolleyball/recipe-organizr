@@ -31,3 +31,6 @@ HELP.md
 
 ### PGAdmin Sessions ###
 ./docker/pgadmin/sessions
+
+### Custom Computer specific scripts ###
+launch-via-gradle.sh

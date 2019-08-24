@@ -17,6 +17,7 @@ import {RecipeAppModule} from '../../projects/recipe/src/app/recipe-app.module';
 import {FormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {CookbookAppModule} from '../../projects/cookbook/src/app/cookbook.module';
+import {VersionService} from './version/version.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {CookbookAppModule} from '../../projects/cookbook/src/app/cookbook.module
   ],
   providers: [
     UserService,
-    CookieService
+    CookieService,
+    VersionService
   ],
   bootstrap: [AppComponent]
 })

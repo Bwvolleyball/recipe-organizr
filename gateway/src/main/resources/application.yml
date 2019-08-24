@@ -60,6 +60,14 @@ management:
   endpoint:
     health:
       show-details: always
+  info:
+    git:
+      mode: full
+      enabled: true
+    env:
+      enabled: true
+    build:
+      enabled: true
 
 bwvolleyball:
   server:
