@@ -7,6 +7,7 @@ plugins {
 	kotlin("jvm") version "1.3.40"
 	kotlin("plugin.spring") version "1.3.40"
 	id ("com.gradle.build-scan") version "2.3"
+	id("com.gorylenko.gradle-git-properties") version "1.5.1"
 }
 
 apply (plugin = "io.spring.dependency-management")
@@ -19,7 +20,7 @@ buildScan {
 }
 
 group = "io.bwvolleyball"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.2"
 
 val swaggerVersion = "2.9.2"
 
