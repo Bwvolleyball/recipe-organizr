@@ -1,12 +1,12 @@
 <div class="navbar navbar-nav footer bg-primary">
   <div class="row mt-3 mb-3">
-    <div class="col p-1" [hidden]="!versionInfo?.git">
+    <div class="col p-1 white-border-right" [hidden]="!versionInfo?.git">
       <p class="text-light mr-5">v{{versionInfo?.git?.build.version}}.{{versionInfo?.git?.total.commit.count}}
       </p>
       <p class="text-light mr-5">Last Updated {{versionInfo?.git?.commit.time}}
         @ {{versionInfo?.git?.commit.id.abbrev}}</p>
     </div>
-    <div class="col p-1">
+    <div class="col p-1 white-border-right">
       <p class="text-light text-center">
         <fa-icon [icon]="faCopyright"></fa-icon>
         2019 Recipe Organizr. All Rights Reserved.
