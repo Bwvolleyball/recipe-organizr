@@ -7,7 +7,7 @@ import {Observable, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class VersionService implements OnInit {
-  
+
   constructor(private http: HttpClient) {
   }
 
