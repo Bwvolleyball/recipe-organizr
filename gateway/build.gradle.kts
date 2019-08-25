@@ -20,7 +20,7 @@ buildScan {
 }
 
 group = "io.bwvolleyball"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.2"
 
 val swaggerVersion = "2.9.2"
 

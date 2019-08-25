@@ -1,15 +1,16 @@
 <div class="navbar navbar-nav footer bg-primary">
   <div class="row mt-3 mb-3">
     <div class="col p-1" [hidden]="!versionInfo?.git">
-      <p class="text-light mr-5">Version: {{versionInfo?.git?.build.version}}
-        @{{versionInfo?.git?.commit.id.abbrev}}</p>
-      <p class="text-light mr-5">Last Updated {{versionInfo?.git?.commit.time}},
-        Revision {{versionInfo?.git?.total.commit.count}}</p>
+      <p class="text-light mr-5">v{{versionInfo?.git?.build.version}}.{{versionInfo?.git?.total.commit.count}}
+      </p>
+      <p class="text-light mr-5">Last Updated {{versionInfo?.git?.commit.time}}
+        @ {{versionInfo?.git?.commit.id.abbrev}}</p>
     </div>
     <div class="col p-1">
       <p class="text-light text-center">
         <fa-icon [icon]="faCopyright"></fa-icon>
-        2019 Recipe Organizr. All Rights Reserved.</p>
+        2019 Recipe Organizr. All Rights Reserved.
+      </p>
       <p class="text-light text-center">Check me out on <a
         class="link text-light" href="https://github.com/Bwvolleyball/recipe-organizr">Github</a>.
       </p>
