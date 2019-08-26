@@ -17,6 +17,7 @@ The latest version is hosted at https://recipe-organizr.me.
 * [Experimental Annotated Bibliograpy in Markdown](./docs/ANNOTATED_BIBLIOGRAPHY.md)
 * [Field Notebook](./docs/FIELD_NOTEBOOK.md)
 * [Server Install](./docs/SERVER_INSTALL.md)
+* [The Final Presentation (.pptx)](./docs/praticum-final-presentation.pptx)
 
 ## Application Architecture
 > For a more comprehensive documen about this application's archietecture, view the [Project Proposal](./docs/PROJECT_PROPOSAL.md).
