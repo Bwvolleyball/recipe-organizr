@@ -1,6 +1,8 @@
 sudo: false
 services:
 - docker
+before_install:
+- gpg --batch --yes --passphrase $GPG_PASSWORD --output service-account.json --decrypt service-account.json.gpg
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -8,8 +10,10 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+  - "$HOME/google-cloud-sdk/"
 stages:
 - compile
+- deploy
 jobs:
   include:
   - stage: compile
@@ -86,3 +90,17 @@ jobs:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && docker
       build -t bwvolleyball/swagger-api . && docker push bwvolleyball/swagger-api
+  - stage: deploy
+    if: branch = master AND type = push
+    script:
+    - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk;
+      export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com |
+      bash; fi
+    - ls /home/travis/google-cloud-sdk
+    - source /home/travis/google-cloud-sdk/path.bash.inc
+    - gcloud version
+    - gcloud auth activate-service-account $GCLOUD_SVC_ACCOUNT --key-file=./service-account.json
+    - gcloud compute scp ./gcp/deploy.sh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE:/tmp/deploy.sh
+      --zone=us-west1-a --project=$GCLOUD_PROJECT
+    - gcloud compute ssh $GCLOUD_SVC_ACCOUNT_USER@$GCLOUD_INSTANCE --command="cd /tmp/;
+      sudo chmod 777 deploy.sh; sudo bash deploy.sh;" --zone=us-west1-a --project=$GCLOUD_PROJECT
