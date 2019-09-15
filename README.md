@@ -1,8 +1,6 @@
 # recipe-organizr
 >A web-based cookbook application built as my practicum project for my masters in software engineering.
 
-The latest version is hosted at https://recipe-organizr.me.
-
 ## Build Status
 > This project uses Travis CI for CI/CD builds both on commit and when a pull request is opened.
 
@@ -142,7 +140,11 @@ This project is deployed via travis-ci directly to the google cloud compute engi
 It is deployed on each push (and successful build) of the `master` branch. See the below diagram for a break-down
 of the CI/CD flow for this project.
 
-This application will be hosted at http://recipe-organizr.me until this practicum has been completed.
+~~This application will be hosted at http://recipe-organizr.me until this practicum has been completed.~~
+
+This application is currently not hosted anywhere, but there are plans to transform this app to a desktop app of some sorts
+so that everyone will still be able to enjoy this if thy want!  In the meantime, follow the installation steps above to run
+this application for development!
 
 ![CI/CD Workflow for Recipe Organizr](./docs/images/ci_cd_diagram.png)
 
